@@ -55,11 +55,11 @@ class OrderDescription (models.Model):
     user_courier = models.ForeignKey(User,on_delete=models.CASCADE)
     cartproduct = models.ForeignKey(CartProduct,on_delete=models.CASCADE)
     address = models.CharField(max_length=64)
-    status = models.CharField(max_length=64)
 
 class Order (models.Model):
     user_buyer = models.ForeignKey(User,on_delete=models.CASCADE)
     orderdescription = models.ForeignKey(OrderDescription, on_delete=models.CASCADE)
+    status = models.CharField(max_length=64)
 
 class UserProduct(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)   
