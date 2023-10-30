@@ -3,11 +3,12 @@ from django import forms
 from django.core.validators import MaxValueValidator
 
 ROLE_CHOICES = (
-    ('Purchaser'),
-    ('Salesperson'),
-    ('Admin'),
-    ('Courier'),
-    )
+    ('Purchaser', 'Purchaser'),
+    ('Salesperson', 'Salesperson'),
+    ('Admin', 'Admin'),
+    ('Courier', 'Courier'),
+)
+
 
 GENDER_CHOICES = (
     ('M', 'Male'),
