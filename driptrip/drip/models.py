@@ -50,7 +50,6 @@ class CartProduct(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     
-    
 class OrderDescription (models.Model):
     user_courier = models.ForeignKey(User,on_delete=models.CASCADE)
     cartproduct = models.ForeignKey(CartProduct,on_delete=models.CASCADE)
