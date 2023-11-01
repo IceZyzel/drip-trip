@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.core.validators import MaxValueValidator
+from django.contrib.auth.models import User
 
 GENDER_CHOICES = (
     ('M', 'Male'),
@@ -8,11 +9,9 @@ GENDER_CHOICES = (
     ('U', 'Unisex'),
     )
 
-class User (models.Model):
-    name = models.CharField(max_length=64)
-    email = models.CharField(max_length=64)
-    phone = models.CharField(max_length=64)
-    password = models.CharField(max_length=64)
+class User (User):
+    class Meta:
+        proxy = True
     
 class UserClient (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
