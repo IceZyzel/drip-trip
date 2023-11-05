@@ -9,7 +9,7 @@ def home(request):
  
 def login(request):
 	if request.method == "GET":
-		return render(request, 'drip/register.html')
+		return render(request, 'drip/login.html')
 	else:
 		form = RegisterUserForm(request.POST)
 		if form.is_valid():
