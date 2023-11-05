@@ -7,11 +7,12 @@
 </head>
 <body>
     <div class="container">
-        <form action="/login" method="POST">
+        <form action="{% url 'Userlogin' %}" method="POST">
+            {% csrf_token %}
             <img src="{% static 'drip/img/login.png' %}" alt="Welcome Image" >
             <h1>Welcome Back!</h1>
             <div>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
@@ -21,7 +22,7 @@
             </div>
             <div class="no-account" id="dont-have-account" name="dont-have-account">
                 Don't have an account?
-                <span class="register-button" id="register-button" name="register-button" formaction="register.html" formmethod="post">Register</span>
+                <a class="register-button" id="register-button" name="register-button"  href="{% url 'register'%}" >Register </a>
             </div>
         </form>
     </div>

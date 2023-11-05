@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/main.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="{% static 'drip/img/logo.png' %}" alt="Логотип">
+                <h1>DriP TRip</h1>
+            </div>
+            <div class="header-right">
+                <div class="search">
+                    <input type="text" placeholder="Search clothes">
+                </div>
+                {% if sign %}
+                <a href="/login">LogOut</a>
+                {%else%}
+                <a href="/login">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="category-block">
+            <div class="category">Male</div>
+            <div class="category">Female</div>
+            <div class="category">Children</div>
+            <div class="category">Other</div>
+        </div>
+        <div class="main-block">
+            <div class="filter-block">
+                <div class="filter-category">
+                    <div class="category-title">BRAND</div>
+                    <div class="sub-category">
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Brand 1</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Brand 2</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Brand 3</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-category">
+                    <div class="category-title">CATEGORY</div>
+                    <div class="sub-category">
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Category 1</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Category 2</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Category 3</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-category">
+                    <div class="category-title">TYPE</div>
+                    <div class="sub-category">
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Type 1</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Type 2</div>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"/>
+                            <div class="checkbox-checkmark"></div>
+                            <div class="checkbox-body">Type 3</div>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-category">
+                    <div class="category-title">PRICE</div>
+                    <div class="sub-category">
+                        <label>From: <input type="number"></label>
+                        <label>To: <input type="number"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="product-block">
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 1">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.5<img src="img/Star.png"></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 2">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.0<img src="img/Star.png"></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 2">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.0<img src="img/Star.png"></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 2">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.0<img src="img/Star.png"></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 2">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.0<img src="img/Star.png"></p>
+                        </div> 
+                    </a>   
+                </div>
+                <div class="product">
+                    <a href="">
+                        <img src="img/product2.png" alt="Товар 2">
+                        <h3>Sneakers NIKE</h3>
+                        <div class="description">
+                            <p class="price">4555 ₴</p>
+                            <p class="rating">4.0<img src="img/Star.png"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'drip/scripts/main.js' %}"></script>
+</body>
+</html>

@@ -1,24 +1,34 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, LoginUserForm
+from django.contrib.auth import authenticate, login
 
 
 def home(request):
-	return HttpResponse('<h1>Home</h1>')
+	context = {
+		'sign': request.user.is_authenticated
+			}
+
+	return render(request, 'drip/home.html', context)
  
-def login(request):
+def userlogin(request):
 	if request.method == "GET":
 		return render(request, 'drip/login.html')
 	else:
-		form = RegisterUserForm(request.POST)
+		form = LoginUserForm(request.POST) 
+
 		if form.is_valid():
-			form.save()
-			#username = form.cleaned_data.get('username')
-			#messages.success(request, f'Создан аккаунт {username}!')
-			return redirect('login')
+			user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+			if user is not None:
+				login(request, user, backend=None)
+				return redirect('home')
+			else:
+				return render(request, 'drip/login.html')
 		else:
-			print(form.errors)
 			return render(request, 'drip/login.html')
 
 def register(request):
@@ -28,8 +38,6 @@ def register(request):
 		form = RegisterUserForm(request.POST)
 		if form.is_valid():
 			form.save()
-			#username = form.cleaned_data.get('username')
-			#messages.success(request, f'Создан аккаунт {username}!')
 			return redirect('login')
 		else:
 			print(form.errors)

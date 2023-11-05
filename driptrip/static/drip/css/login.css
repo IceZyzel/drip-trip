@@ -41,7 +41,7 @@ h1 {
 }
 
 
-input[type="email"], input[type="password"] {
+input[type="text"], input[type="password"] {
     width: 150%; 
     padding: 10px; 
     margin: 5px 100px 10px -55px; 
@@ -50,7 +50,7 @@ input[type="email"], input[type="password"] {
     
 }
 
-input[type="email"]::placeholder, input[type="password"]::placeholder {
+input[type="text"]::placeholder, input[type="password"]::placeholder {
     color: #999; 
 }
 
