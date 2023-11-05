@@ -12,13 +12,14 @@ GENDER_CHOICES = (
 class User (User):
     class Meta:
         proxy = True
-    
+
 class UserClient (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 class UserCourier (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+# нахуй не надо
 class UserAdmin (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     

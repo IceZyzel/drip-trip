@@ -1,13 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title> 
-            Login
-        </title>
-    </head>
-
-    <body>
-        
-    </body>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'drip/css/login.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <form action="/login" method="POST">
+            <img src="{% static 'drip/img/login.png' %}" alt="Welcome Image" >
+            <h1>Welcome Back!</h1>
+            <div>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div>
+                <input type="submit" id="login-button" name="login-button" value="Login">
+            </div>
+            <div class="no-account" id="dont-have-account" name="dont-have-account">
+                Don't have an account?
+                <span class="register-button" id="register-button" name="register-button" formaction="register.html" formmethod="post">Register</span>
+            </div>
+        </form>
+    </div>
+</body>
 </html>
