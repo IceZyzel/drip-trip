@@ -38,7 +38,7 @@ def register(request):
 		form = RegisterUserForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('login')
+			return redirect('Userlogin')
 		else:
 			print(form.errors)
 			return render(request, 'drip/register.html')
