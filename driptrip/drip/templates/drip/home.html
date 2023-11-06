@@ -19,7 +19,7 @@
                 </div>
                 {% if sign %}
                 <a href="/login">LogOut</a>
-                {%else%}
+                {% else %}
                 <a href="/login">Sign In</a>
                 {% endif %}
             </div>
@@ -103,66 +103,19 @@
                 </div>
             </div>
             <div class="product-block">
+                {% for product in products %}
                 <div class="product">
                     <a href="">
-                        <img src="img/product2.png" alt="Товар 1">
-                        <h3>Sneakers NIKE</h3>
+                        <img src="{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}">
+                        <h3>{{ product.name }}</h3>
                         <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.5<img src="img/Star.png"></p>
+                            <p class="price">{{ product.price }} ₴</p>
+                            <!-- Добавьте остальные поля, такие как бренд и описание, из модели Product -->
+                            <p class="rating">4.0<img src="{% static 'img/Star.png' %}"></p>
                         </div>
                     </a>
                 </div>
-                <div class="product">
-                    <a href="">
-                        <img src="img/product2.png" alt="Товар 2">
-                        <h3>Sneakers NIKE</h3>
-                        <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.0<img src="img/Star.png"></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="">
-                        <img src="img/product2.png" alt="Товар 2">
-                        <h3>Sneakers NIKE</h3>
-                        <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.0<img src="img/Star.png"></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="">
-                        <img src="img/product2.png" alt="Товар 2">
-                        <h3>Sneakers NIKE</h3>
-                        <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.0<img src="img/Star.png"></p>
-                        </div>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="">
-                        <img src="img/product2.png" alt="Товар 2">
-                        <h3>Sneakers NIKE</h3>
-                        <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.0<img src="img/Star.png"></p>
-                        </div> 
-                    </a>   
-                </div>
-                <div class="product">
-                    <a href="">
-                        <img src="img/product2.png" alt="Товар 2">
-                        <h3>Sneakers NIKE</h3>
-                        <div class="description">
-                            <p class="price">4555 ₴</p>
-                            <p class="rating">4.0<img src="img/Star.png"></p>
-                        </div>
-                    </a>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </main>

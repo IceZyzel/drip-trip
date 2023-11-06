@@ -3,14 +3,17 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterUserForm, LoginUserForm
 from django.contrib.auth import authenticate, login
+from .models import Product, PhotoProduct
 
 
 def home(request):
-	context = {
-		'sign': request.user.is_authenticated
-			}
+    products = Product.objects.all()  # Извлекаем все продукты
+    context = {
+        'sign': request.user.is_authenticated,
+        'products': products,  # Добавляем переменную products в контекст
+    }
+    return render(request, 'drip/home.html', context)
 
-	return render(request, 'drip/home.html', context)
  
 def userlogin(request):
 	if request.method == "GET":
