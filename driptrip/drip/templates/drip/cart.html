@@ -1,0 +1,37 @@
+{% load static %}
+{% include "drip/header.html" %}
+
+<div class="cart-page">
+    <p class="nummer">Order № 100021</p>
+    <p class="data">08.11.2023</p>
+    <div class="cart-product">
+        <img src="{% static 'drip/img/product2.png' %}" alt="">
+        <div class="cart-product-info">
+            <h3>Nike Sneakers Male</h3>
+            <p class="cart-size">Size: 31</p>
+            <div>
+                <p>John America</p>
+                <p class="cart-price">4555 ₴</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <form action="/cart" method="POST">
+            <div>
+                <p>Contact Information</p>
+                <input type="text" id="contactInforamtion" name="contactInforamtion" placeholder="" required>
+            </div>
+            <div>
+                <p>Delivery Address</p>
+                <input type="password" id="address" name="adress" placeholder="" required>
+            </div>
+            <div>
+                <input type="submit" value="Delivery">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
