@@ -30,7 +30,8 @@ class Product (models.Model):
     brand = models.CharField(max_length=64)
     description = models.TextField(max_length=250)
     sex = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    category = models.TextField(max_length=250)
+    category = models.ForeignKey('Category',on_delete=models.CASCADE,null=True)
+    subcategory = models.ForeignKey('Subcategory',on_delete=models.CASCADE,null=True)
     date = models.DateField()
 
 class PhotoProduct(models.Model):
@@ -59,3 +60,10 @@ class Order (models.Model):
 class OrderProduct (models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
+
+class Category(models.Model):
+    name = models.CharField(max_length=64)
+
+class Subcategory(models.Model):
+    category= models.ForeignKey('Category',on_delete=models.DO_NOTHING,null=True)
+    name = models.CharField(max_length=64)
