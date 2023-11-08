@@ -51,11 +51,11 @@ def register(request):
 def cart(request):
     return render(request, 'drip/cart.html')
 
+
 def exit(request):
     logout(request)
-    
+
     context = {
         'sign': request.user.is_authenticated,
     }
     return render(request, 'drip/home.html', context)
-
