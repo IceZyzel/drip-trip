@@ -77,9 +77,6 @@
                         <label>To: <input type="number"></label>
                     </div>
                 </div>
-                <div class="add-products">
-                    <a href="addProduct">ADD PRODUCT</a>
-                </div>
             </div>
             <div class="product-block">
                 {% for product in products %}
@@ -90,7 +87,7 @@
                         <div class="description">
                             <p class="price">{{ product.price }} ₴</p>
                             <!-- Добавьте остальные поля, такие как бренд и описание, из модели Product -->
-                            <p class="rating">4.0<img src="{% static 'img/Star.png' %}"></p>
+                            <p class="rating">4.0<img src="{% static 'drip/img/Star.png' %}"></p>
                         </div>
                     </a>
                 </div>
