@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterUserForm, LoginUserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Product, PhotoProduct
 
 
@@ -50,3 +50,12 @@ def register(request):
 
 def cart(request):
     return render(request, 'drip/cart.html')
+
+def exit(request):
+    logout(request)
+    
+    context = {
+        'sign': request.user.is_authenticated,
+    }
+    return render(request, 'drip/home.html', context)
+
