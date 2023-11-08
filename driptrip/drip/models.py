@@ -9,6 +9,7 @@ GENDER_CHOICES = (
     ('U', 'Unisex'),
     )
 
+
 class User (User):
     class Meta:
         proxy = True

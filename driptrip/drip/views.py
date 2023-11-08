@@ -6,8 +6,12 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Product, PhotoProduct
 
 
-def home(request):
-    products = Product.objects.all()  # Извлекаем все продукты
+def home(request, sex_filter = None):
+    if(sex_filter == None):
+        products = Product.objects.all()  # Извлекаем все продукты
+    else:
+        products = Product.objects.filter(sex=sex_filter)  # Извлекаем продукты по фильтру
+    
     context = {
         'sign': request.user.is_authenticated,
         'products': products,  # Добавляем переменную products в контекст
