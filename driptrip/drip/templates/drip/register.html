@@ -13,15 +13,30 @@
             <h1 class="welcome-heading">Welcome To</h1>
             <div>
                 <input type="text" id="full-name" name="username" placeholder="Enter your full name" required>
+                {% if errors.username %}
+                    <span class="error-message">{{ errors.username }}</span>
+                {% endif %}
             </div>
             <div>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div>
+                <input type="text1" id="name" name="name" placeholder="Enter your last name" required>
+            </div>
+            <div>
+                <input type="text2" id="surname" name="surname" placeholder="Enter your first name" required>
+            </div>
+            <div>
                 <input type="password" id="password" name="password1" placeholder="Enter your password" required>
+                {% if errors.password1 %}
+                    <span class="error-message">{{ errors.password1 }}</span>
+                {% endif %}
             </div>
             <div>
                 <input type="password" id="confirm-password" name="password2" placeholder="Confirm Password" required>
+                {% if errors.password2 %}
+                    <span class="error-message">{{ errors.password2 }}</span>
+                {% endif %}
             </div>
             <input type="submit" id="register-button" name="register-button" value="Register">
             <div class="no-account">
