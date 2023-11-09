@@ -1,7 +1,8 @@
+import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterUserForm, LoginUserForm
+from .forms import RegisterUserForm, LoginUserForm, CreateProductForm
 from django.contrib.auth import authenticate, login, logout
 from .models import Product, PhotoProduct
 
@@ -63,3 +64,31 @@ def exit(request):
         'sign': request.user.is_authenticated,
     }
     return render(request, 'drip/home.html', context)
+
+def productedit(request):
+
+    context = {
+        'name' : "",
+        'price' : "",
+        'brand' : "",
+        'description' : "",
+        'sex' : "",
+        'category' : "",
+        'userclirent' : ""
+    }
+
+    if request.method == "GET":
+        return render(request, 'drip/productedit.html')
+    else:
+        form = CreateProductForm (request.POST)
+
+        if request.user.is_authenticated:
+            if form.is_valid():
+                form.instance.userclient_id = request.user.id
+                form.save()
+                return redirect('home')
+            else:
+                print(form.errors)
+                return render(request, 'drip/productedit.html', context)
+        else:
+            return redirect('login')
