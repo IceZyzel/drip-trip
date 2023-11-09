@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\driptrip",
-    "\\driptrip\\drip",
-    "\\driptrip\\drip\\templates",
-    "\\driptrip\\drip\\templates\\drip"
+    "\\driptrip\\drip"
   ],
-  "SelectedNode": "\\driptrip\\drip\\views.py",
+  "SelectedNode": "\\driptrip\\drip\\urls.py",
   "PreviewInSolutionExplorer": false
 }

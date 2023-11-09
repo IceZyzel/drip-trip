@@ -1,11 +1,10 @@
-from datetime import datetime
-from django.db.models import Max
+import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterUserForm, LoginUserForm
+from .forms import RegisterUserForm, LoginUserForm, CreateProductForm
 from django.contrib.auth import authenticate, login, logout
-from .models import *
+from .models import Product, PhotoProduct
 
 
 def home(request, sex_filter = None):
@@ -55,16 +54,7 @@ def register(request):
 
 
 def cart(request):
-    
-    # order_id = Order.objects.all().order_by('-id').id
-
-
-    date = datetime.date
-    context = {        
-        'future_order_id': 1,
-        'date':date,
-    }
-    return render(request, 'drip/cart.html', context)
+    return render(request, 'drip/cart.html')
 
 
 def exit(request):
@@ -74,3 +64,31 @@ def exit(request):
         'sign': request.user.is_authenticated,
     }
     return render(request, 'drip/home.html', context)
+
+def productedit(request):
+
+    context = {
+        'name' : "",
+        'price' : "",
+        'brand' : "",
+        'description' : "",
+        'sex' : "",
+        'category' : "",
+        'userclirent' : ""
+    }
+
+    if request.method == "GET":
+        return render(request, 'drip/productedit.html')
+    else:
+        form = CreateProductForm (request.POST)
+
+        if request.user.is_authenticated:
+            if form.is_valid():
+                form.instance.userclient_id = request.user.id
+                form.save()
+                return redirect('home')
+            else:
+                print(form.errors)
+                return render(request, 'drip/productedit.html', context)
+        else:
+            return redirect('login')
