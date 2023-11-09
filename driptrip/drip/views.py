@@ -1,9 +1,11 @@
+from datetime import datetime
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterUserForm, LoginUserForm
 from django.contrib.auth import authenticate, login, logout
-from .models import Product, PhotoProduct
+from .models import *
 
 
 def home(request, sex_filter = None):
@@ -53,7 +55,16 @@ def register(request):
 
 
 def cart(request):
-    return render(request, 'drip/cart.html')
+    
+    # order_id = Order.objects.all().order_by('-id').id
+
+
+    date = datetime.date
+    context = {        
+        'future_order_id': 1,
+        'date':date,
+    }
+    return render(request, 'drip/cart.html', context)
 
 
 def exit(request):
