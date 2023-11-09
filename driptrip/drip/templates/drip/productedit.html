@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    <div class="container">
+        <form action= "{% url 'productedit' %}" method="post">     
+            {% csrf_token %}       
+            <div>
+                <input type="text" id="name" name="name" value="{{ name }}" required><br>
+            </div>
+
+            <div>
+                <input type="text" id="price" name="price" value="{{ price }}" required><br>
+            </div>
+
+            <div>
+                <input type="text" id="brand" name="brand" value="{{ brand }}" required><br>
+            </div>
+
+            <div>
+                <input type="text" id="description" name="description" value="{{ description }}" required><br>
+            </div>
+
+            <div>
+                <select id="sex" name="sex" required>
+                    {% if sex == "M" %}
+                    <option value="M" selected>Male</option>
+                    {% else %}
+                    <option value="M">Male</option>
+                    {%endif%}
+
+                    {% if sex == "F" %}
+                    <option value="F" selected>Female</option>
+                    {% else %}
+                    <option value="F">Female</option>
+                    {%endif%}
+
+                    {% if sex == "U" %}
+                    <option value="U" selected>Unisex</option>
+                    {% else %}
+                    <option value="U">Unisex</option>
+                    {%endif%}
+                </select>
+            </div>
+
+            <div>
+                <select type="text" id="category" name="category"" required><br>
+                    {% if sex == "Shoes" %}
+                    <option value="Shoes" selected>Shoes</option>
+                    {% else %}
+                    <option value="Shoes">Shoes</option>
+                    {%endif%}
+
+                    {% if sex == "Accessories" %}
+                    <option value="Accessories" selected>Accessories</option>
+                    {% else %}
+                    <option value="Accessories">Accessories</option>
+                    {%endif%}
+
+                    {% if sex == "Activewear" %}
+                    <option value="Activewear" selected>Activewear</option>
+                    {% else %}
+                    <option value="Activewear">Activewear</option>
+                    {%endif%}
+
+                    {% if sex == "Outerwear" %}
+                    <option value="Outerwear" selected>Outerwear</option>
+                    {% else %}
+                    <option value="M">Outerwear</option>
+                    {%endif%}
+
+                    {% if sex == "Formal Wear" %}
+                    <option value="Formal Wear" selected>Formal Wear</option>
+                    {% else %}
+                    <option value="Formal Wear">Formal Wear</option>
+                    {%endif%}
+
+                    {% if sex == "Casual Wear" %}
+                    <option value="Casual Wear" selected>Casual Wear</option>
+                    {% else %}
+                    <option value="Casual Wear">Casual Wear</option>
+                    {%endif%}
+
+                    {% if sex == "Underwear" %}
+                    <option value="Underwear" selected>Underwear</option>
+                    {% else %}
+                    <option value="Underwear">Underwear</option>
+                    {%endif%}
+
+                    {% if sex == "Swimwear" %}
+                    <option value="Swimwear" selected>Swimwear</option>
+                    {% else %}
+                    <option value="Swimwear">Swimwear</option>
+                    {%endif%}
+
+                    {% if sex == "Vintage Clothing" %}
+                    <option value="Vintage Clothing" selected>Vintage Clothing</option>
+                    {% else %}
+                    <option value="Vintage Clothing">Vintage Clothing</option>
+                    {%endif%}
+
+                    {% if sex == "Maternity Wear" %}
+                    <option value="Maternity Wear" selected>Maternity Wear</option>
+                    {% else %}
+                    <option value="Maternity Wear">Maternity Wear</option>
+                    {%endif%}
+
+                    {% if sex == "Sportswear" %}
+                    <option value="Sportswear" selected>Sportswear</option>
+                    {% else %}
+                    <option value="Sportswear">Sportswear</option>
+                    {%endif%}
+
+                    {% if sex == "Sleepwear" %}
+                    <option value="Sleepwear" selected>Sleepwear</option>
+                    {% else %}
+                    <option value="Sleepwear">Sleepwear</option>
+                    {%endif%}
+
+                    {% if sex == "Workwear" %}
+                    <option value="Workwear" selected>Workwear</option>
+                    {% else %}
+                    <option value="Workwear">Workwear</option>
+                    {%endif%}
+
+                    {% if sex == "Ethical and Sustainable Fashion" %}
+                    <option value="Ethical and Sustainable Fashion" selected>Ethical and Sustainable Fashion</option>
+                    {% else %}
+                    <option value="Ethical and Sustainable Fashion">Ethical and Sustainable Fashion</option>
+                    {%endif%}
+
+                    {% if sex == "Costumes and Cosplay" %}
+                    <option value="Costumes and Cosplay" selected>Costumes and Cosplay</option>
+                    {% else %}
+                    <option value="Costumes and Cosplay">Costumes and Cosplay</option>
+                    {%endif%}
+
+                    {% if sex == "Designer Clothing" %}
+                    <option value="Designer Clothing" selected>Designer Clothing</option>
+                    {% else %}
+                    <option value="Designer Clothing">Designer Clothing</option>
+                    {%endif%}
+            </div>
+
+            <div>
+                <input type="submit" id="submit-button" name="submit-button" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

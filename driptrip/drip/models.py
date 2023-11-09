@@ -9,6 +9,25 @@ GENDER_CHOICES = (
     ('U', 'Unisex'),
     )
 
+CATEGORY_CHOICES = (
+    ('Shoes', 'Shoes'),
+    ('Accessories', 'Accessories'),
+    ('Activewear', 'Activewear'),
+    ('Outerwear', 'Outerwear'),
+    ('Formal Wear', 'Formal Wear'),
+    ('Casual Wear', 'Casual Wear'),
+    ('Underwear', 'Underwear'),
+    ('Swimwear', 'Swimwear'),
+    ('Vintage Clothing', 'Vintage Clothing'),
+    ('Maternity Wear', 'Maternity Wear'),
+    ('Sportswear', 'Sportswear'),
+    ('Sleepwear', 'Sleepwear'),
+    ('Workwear', 'Workwear'),
+    ('Ethical and Sustainable Fashion', 'Ethical and Sustainable Fashion'),
+    ('Costumes and Cosplay', 'Costumes and Cosplay'),
+    ('Designer Clothing', 'Designer Clothing'),
+    )
+
 class User (User):
     class Meta:
         proxy = True
@@ -30,8 +49,7 @@ class Product (models.Model):
     brand = models.CharField(max_length=64)
     description = models.TextField(max_length=250)
     sex = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    category = models.TextField(max_length=250)
-    date = models.DateField()
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
 
 class PhotoProduct(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
