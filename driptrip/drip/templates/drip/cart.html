@@ -2,19 +2,28 @@
 {% include "drip/header.html" %}
 
 <div class="cart-page">
-    <p class="nummer">Order № 123123</p>
-    <p class="data"></p>
+    <p class="nummer">Order № {{future_order_id}}</p>
+    <p class="data">{{date}}</p>
+    {% for product in product_list %}
     <div class="cart-product">
         <img src="{% static 'drip/img/product2.png' %}" alt="">
         <div class="cart-product-info">
-            <h3>Nike Sneakers Male</h3>
+            <h3>{{ product.product.name }}</h3>
+
             <p class="cart-size">Size: 31</p>
             <div>
-                <p>John America</p>
-                <p class="cart-price">4555 ₴</p>
+                <p>{{ product.product.brand}}</p>
+                <p class="cart-price">{{ product.product.price }} ₴</p>
             </div>
         </div>
     </div>
+    {% endfor %}
+
+
+    <form action="/" method="post">
+    </form>
+
+
     <hr>
     <div>
         <form action="/cart" method="POST">

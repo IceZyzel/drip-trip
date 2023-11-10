@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\driptrip",
-    "\\driptrip\\drip"
+    "\\driptrip\\drip",
+    "\\driptrip\\driptrip",
+    "\\driptrip\\drip\\migrations",
+    "\\driptrip\\drip\\templates",
+    "\\driptrip\\drip\\templates\\drip"
   ],
-  "SelectedNode": "\\driptrip\\drip\\urls.py",
+  "SelectedNode": "\\driptrip\\drip\\templates\\drip\\productedit.html",
   "PreviewInSolutionExplorer": false
 }

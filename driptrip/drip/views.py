@@ -1,10 +1,10 @@
-import datetime
-from django.shortcuts import render, redirect
+from datetime import datetime
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterUserForm, LoginUserForm, CreateProductForm, AddNewSize, AddNewPhoto
 from django.contrib.auth import authenticate, login, logout
-from .models import Product, PhotoProduct
+from .models import *
 
 
 def home(request, sex_filter = None):
@@ -54,7 +54,64 @@ def register(request):
 
 
 def cart(request):
-    return render(request, 'drip/cart.html')
+
+    #получаем id последнего заказа
+    latest_order = Order.objects.order_by('-id').first()
+    if latest_order is not None:
+        order_id = latest_order.id+1
+    else:
+        order_id = None
+
+    #получаем корзину
+    cart = request.session.get('cart',{})  
+    product_list = []
+
+    #текущая дата
+    date = datetime.now()
+    
+
+    for item_id in cart:
+        product_id = item_id.get('id')
+        product = get_object_or_404(Product, id=product_id)
+        product_list.append({'product': product,})   
+
+    
+    context ={
+        'cart_list': cart,
+        'product_list': product_list,
+        'date':date,
+        'future_order_id':order_id
+    }
+
+    
+    return render(request, 'drip/cart.html',context) 
+
+def add_to_cart(request,id):
+    
+        if not request.session.get('cart'):
+            request.session['cart']=list()
+        else:
+            request.session['cart'] = list(request.session['cart'])
+
+        
+        cart_ids_list = list()
+        for item in request.session['cart']:
+            cart_ids_list.append(item['id'])
+
+
+       # item_exist = next((item for item in request.session['cart'] if item["type"]==request.POST.get('type') and item["id"] == id), False)
+
+
+        add_data = {
+            #'type':request.POST.get('type'),
+            'id':id
+        }
+
+        if id not in cart_ids_list :
+            request.session['cart'].append(add_data)
+            request.session.modified = True
+        
+        return render(request,'drip/cart.html')
 
 
 def exit(request):
@@ -157,3 +214,4 @@ def newphoto(request, product):
                 return redirect('newphoto', product)
         else:
             return redirect('login')    
+
