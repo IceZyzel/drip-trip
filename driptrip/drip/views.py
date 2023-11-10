@@ -2,7 +2,7 @@ import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterUserForm, LoginUserForm, CreateProductForm
+from .forms import RegisterUserForm, LoginUserForm, CreateProductForm, AddNewSize
 from django.contrib.auth import authenticate, login, logout
 from .models import Product, PhotoProduct
 
@@ -85,10 +85,39 @@ def productedit(request):
         if request.user.is_authenticated:
             if form.is_valid():
                 form.instance.userclient_id = request.user.id
-                form.save()
-                return redirect('home')
+                p = form.save()
+                new_id = p.id
+                return render(request, 'drip/newsize.html', {'product' : new_id})
             else:
                 print(form.errors)
                 return render(request, 'drip/productedit.html', context)
+        else:
+            return redirect('login')
+        
+
+def newsize(request, product):
+     context = {
+        'product' : product
+     }
+
+     if request.method == "GET":
+        return render(request, 'drip/newsize.html', context)
+     else:
+        print(request.POST)
+        form = AddNewSize (request.POST)
+
+        if request.user.is_authenticated:
+            if form.is_valid():
+                form.instance.product_id = product
+                form.save()
+                print(request.POST)
+                if request.POST.get('anothersize') == 'Another size':
+                    return render(request, 'drip/newsize.html', context)
+                elif request.POST.get('submit-button') == 'Submit':
+                    return render(request, 'drip/home.html')
+
+            else:
+                print(form.errors)
+                return render(request, 'drip/newsize.html', context)
         else:
             return redirect('login')
