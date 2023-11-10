@@ -21,7 +21,7 @@ class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'brand', 'description', 'sex', 'category']
-        exclude = ['UserClient']
+        exclude = ['User']
 
 class AddNewSize(forms.ModelForm):
     class Meta:

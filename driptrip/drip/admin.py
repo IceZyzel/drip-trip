@@ -3,9 +3,7 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(UserClient)
 admin.site.register(UserCourier)
-admin.site.register(UserAdmin)
 admin.site.register(Product)
 admin.site.register(PhotoProduct)
 admin.site.register(Size)

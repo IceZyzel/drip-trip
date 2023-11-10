@@ -32,18 +32,11 @@ class User (User):
     class Meta:
         proxy = True
 
-class UserClient (models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-
 class UserCourier (models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-
-# нахуй не надо
-class UserAdmin (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     
 class Product (models.Model):
-    userclient = models.ForeignKey(UserClient,on_delete=models.CASCADE)
+    userclient = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
     price = models.CharField(max_length=64)
     brand = models.CharField(max_length=64)
@@ -62,13 +55,13 @@ class Size (models.Model):
 
 class Review (models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    userclient = models.ForeignKey(UserClient,on_delete=models.CASCADE)
+    userclient = models.ForeignKey(User,on_delete=models.CASCADE)
     description = models.TextField(max_length=250)
     rate = models.IntegerField(validators=[MaxValueValidator(5)])
     date = models.DateField()
 
 class Order (models.Model):
-    userclient = models.ForeignKey(UserClient,on_delete=models.CASCADE)
+    userclient = models.ForeignKey(User,on_delete=models.CASCADE)
     usercourier = models.ForeignKey(UserCourier,on_delete=models.CASCADE)
     adress = models.CharField(max_length=64)
     date = models.DateField()
