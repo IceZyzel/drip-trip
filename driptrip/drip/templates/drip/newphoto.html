@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo</title>
+</head>
+<body>
+    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div>
+            <input type="submit" id="anothernewphoto" name="anothernewphoto" value="Another photo">
+        </div>
+
+        <div>
+            <input type="submit" id="submit-button" name="submit-button" value="Submit">
+        </div>
+
+    </form>
+</body>
+</html>
