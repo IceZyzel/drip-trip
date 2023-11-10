@@ -1,27 +1,32 @@
+{% load static %}
+{% include "drip/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/productedit.css' %}" >
 </head>
 <body>
     <div class="container">
         <form action= "{% url 'productedit' %}" method="post">     
             {% csrf_token %}       
             <div>
+                <label for="name">Product name</label>
                 <input type="text" id="name" name="name" {% if name %} value="{{ name }}" {%endif%} required><br>
-            </div>
-
+            </div>            
             <div>
+                <label for="name">Price</label>
                 <input type="text" id="price" name="price" {% if price %} value="{{ price }}" {%endif%} required><br>
             </div>
 
             <div>
+                <label for="name">Brand</label>
                 <input type="text" id="brand" name="brand" {% if brand %} value="{{ brand }}" {%endif%} required><br>
             </div>
 
             <div>
+                <label for="name">Description</label>
                 <input type="text" id="description" name="description" {% if description %} value="{{ description }}" {%endif%} required><br>
             </div>
 
