@@ -53,7 +53,7 @@ class Product (models.Model):
 
 class PhotoProduct(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    photolink = models.CharField(max_length=100)
+    photolink = models.ImageField(upload_to='products_photo/')
 
 class Size (models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)

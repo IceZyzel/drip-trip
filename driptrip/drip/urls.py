@@ -8,6 +8,7 @@ urlpatterns = [
     path('cart/', views.cart, name='Cart'),
     path('exit/', views.exit, name='exit'),
     path('productedit/', views.productedit, name='productedit'),
-    path('newsize/<int:product>', views.newsize, name='newsize'),
+    path('newphoto/<int:product>', views.newphoto, name='newphoto'),
+    path('newsize/<int:product>', views.newphoto, name='newsize'),
     path('<str:sex_filter>/', views.home, name='home'),
 ]

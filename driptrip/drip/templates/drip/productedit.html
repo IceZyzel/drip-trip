@@ -10,7 +10,7 @@
         <form action= "{% url 'productedit' %}" method="post">     
             {% csrf_token %}       
             <div>
-                <input type="text" id="name" name="name" value="{{ name }}" required><br>
+                <input type="text" id="name" name="name" {% if name %} value="{{ name }}" {%endif%} required><br>
             </div>
 
             <div>
@@ -27,11 +27,8 @@
 
             <div>
                 <select id="sex" name="sex" required>
-                    {% if sex == "M" %}
-                    <option value="M" selected>Male</option>
-                    {% else %}
-                    <option value="M">Male</option>
-                    {%endif%}
+                    
+                    <option value="M" {% if sex == "M" %} selected {%endif%} >Male</option>
 
                     {% if sex == "F" %}
                     <option value="F" selected>Female</option>
