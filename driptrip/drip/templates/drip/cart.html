@@ -5,18 +5,25 @@
     <p class="nummer">Order № {{future_order_id}}</p>
     <p class="data">{{date}}</p>
     {% for product in product_list %}
+                 
     <div class="cart-product">
-        <img src="{% static 'drip/img/product2.png' %}" alt="">
+        {% for photo in product_photos %}
+        {% if photo.product_id == product.product.id %}
+        <img src="/media/{{photo.photolink}}" alt="Photo">
+        {% endif %}
+        {% endfor %}
         <div class="cart-product-info">
             <h3>{{ product.product.name }}</h3>
 
             <p class="cart-size">Size: 31</p>
+            <p> <a href="/remove_from_cart/{{product.product.id}}">Delete</a></p>
             <div>
-                <p>{{ product.product.brand}}</p>
+                <p>{{ product.product.brand }}</p>
                 <p class="cart-price">{{ product.product.price }} ₴</p>
             </div>
         </div>
-    </div>
+    </div>       
+        
     {% endfor %}
 
 

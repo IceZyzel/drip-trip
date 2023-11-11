@@ -4,10 +4,11 @@
     "\\driptrip",
     "\\driptrip\\drip",
     "\\driptrip\\driptrip",
-    "\\driptrip\\drip\\migrations",
-    "\\driptrip\\drip\\templates",
-    "\\driptrip\\drip\\templates\\drip"
+    "\\driptrip\\drip\\migrations\\__pycache__",
+    "\\driptrip\\media\\products_photo",
+    "\\driptrip\\static\\drip",
+    "\\driptrip\\static\\drip\\img"
   ],
-  "SelectedNode": "\\driptrip\\drip\\templates\\drip\\productedit.html",
+  "SelectedNode": "\\driptrip\\drip\\views.py",
   "PreviewInSolutionExplorer": false
 }

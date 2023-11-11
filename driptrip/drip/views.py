@@ -69,6 +69,8 @@ def cart(request):
     #текущая дата
     date = datetime.now()
     
+    product_photos = PhotoProduct.objects.all()
+    
 
     for item_id in cart:
         product_id = item_id.get('id')
@@ -80,7 +82,8 @@ def cart(request):
         'cart_list': cart,
         'product_list': product_list,
         'date':date,
-        'future_order_id':order_id
+        'future_order_id':order_id,
+        'product_photos':product_photos
     }
 
     
@@ -113,6 +116,21 @@ def add_to_cart(request,id):
         
         return render(request,'drip/cart.html')
 
+def remove_from_cart(request,id):
+
+    for item in request.session['cart']:
+        if item['id'] == id:
+            item.clear()
+
+    while {} in request.session['cart']:
+        request.session['cart'].remove({})
+
+    if not request.session['cart']:
+        del request.session['cart']
+
+    request.session.modified = True
+
+    return redirect('cart')
 
 def exit(request):
     logout(request)
