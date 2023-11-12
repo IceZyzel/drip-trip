@@ -37,6 +37,7 @@
       text-align: center;
       color: #FFFFFF;
       margin: 0px;
+      cursor: pointer;
     }
     
     .header-right {
@@ -90,6 +91,8 @@
       background-color: #fff;
       cursor: pointer;
       transition: background-color 0.3s;
+      color:#171717;
+      text-decoration: none;
   }
   
   .category:hover {
@@ -101,6 +104,7 @@
     background-color: #171717;
     color: #fff;
   }
+
 
   .main-block {
     padding-top: 100px;
