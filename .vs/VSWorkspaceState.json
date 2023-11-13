@@ -3,12 +3,8 @@
     "",
     "\\driptrip",
     "\\driptrip\\drip",
-    "\\driptrip\\driptrip",
-    "\\driptrip\\drip\\migrations\\__pycache__",
-    "\\driptrip\\media\\products_photo",
-    "\\driptrip\\static\\drip",
-    "\\driptrip\\static\\drip\\img"
+    "\\driptrip\\driptrip"
   ],
-  "SelectedNode": "\\driptrip\\drip\\views.py",
+  "SelectedNode": "\\driptrip",
   "PreviewInSolutionExplorer": false
 }

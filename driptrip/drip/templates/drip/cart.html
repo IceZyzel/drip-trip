@@ -1,17 +1,22 @@
 {% load static %}
 {% include "drip/header.html" %}
 
+
 <div class="cart-page">
     <p class="nummer">Order № {{future_order_id}}</p>
     <p class="data">{{date}}</p>
     {% for product in product_list %}
-                 
+
     <div class="cart-product">
+        {% with first_match_found=False %}
         {% for photo in product_photos %}
-        {% if photo.product_id == product.product.id %}
-        <img src="/media/{{photo.photolink}}" alt="Photo">
+        {% if photo.product_id == product.product.id and not first_match_found %}
+        <img src="/media/{{ photo.photolink }}" alt="Photo">
+        {% with first_match_found=True %}
+        {% endwith %}
         {% endif %}
         {% endfor %}
+        {% endwith %}
         <div class="cart-product-info">
             <h3>{{ product.product.name }}</h3>
 
@@ -22,13 +27,9 @@
                 <p class="cart-price">{{ product.product.price }} ₴</p>
             </div>
         </div>
-    </div>       
-        
+    </div>
+
     {% endfor %}
-
-
-    <form action="/" method="post">
-    </form>
 
 
     <hr>

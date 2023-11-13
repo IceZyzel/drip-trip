@@ -81,7 +81,7 @@
             <div class="product-block">
                 {% for product in products %}
                 <div class="product">
-                    <a href="">
+                    <a href="/product/{{product.id}}">
                         <img src="{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}">
                         <h3>{{ product.name }}</h3>
                         <div class="description">
