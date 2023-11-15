@@ -370,7 +370,7 @@ def newphoto(request, product):
             return redirect('login')    
         
 def deletephoto(request, photo):
-    photo_to_delete = Size.objects.get(pk = photo)
+    photo_to_delete = PhotoProduct.objects.get(pk = photo)
     product = photo_to_delete.product.pk
     photo_to_delete.delete()
     return redirect('editproduct', product)
