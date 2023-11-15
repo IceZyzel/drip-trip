@@ -1,0 +1,34 @@
+{% load static %}
+{% include "drip/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/all_my_products.css' %}" >
+</head>
+<body>
+    <div class="container">
+            {% csrf_token %}       
+            <div class="product-block">
+                {% for product in products %}
+                <div class="product">
+                    <img src="{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <div class="description">
+                        <p class="price">{{ product.price }} ₴</p>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'editproduct' product.pk %}"> Edit </a> 
+                    </div>
+
+                    <div>
+                        <a href="{% url 'deleteproduct' product.pk %}"> Delete </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+</body>
+</html>
