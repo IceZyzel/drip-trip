@@ -7,7 +7,12 @@
 </head>
 <body>  
     <div class="container">
-        <form action= "{% url 'newsize' product %}"  method="post">     
+        {% if flag %}
+        <form action= "{% url 'addsize' product %}"  method="post">     
+        {% else %}
+        <form action= "{% url 'newsize' product %}"  method="post">    
+        {% endif %}
+
             {% csrf_token %}       
             <div>
                 <input type="text" id="size" name="size" required><br>

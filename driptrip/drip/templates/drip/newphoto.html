@@ -5,7 +5,11 @@
     <title>Photo</title>
 </head>
 <body>
-    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data">
+    {% if flag %}
+    <form action= "{% url 'addphoto' product %}" method = "post" enctype="multipart/form-data">
+    {% else %}
+    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data"></form>
+    {% endif %}
         {% csrf_token %}
         {{ form.as_p }}
 
