@@ -8,13 +8,14 @@
     {% if flag %}
     <form action= "{% url 'addphoto' product %}" method = "post" enctype="multipart/form-data">
     {% else %}
-    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data"></form>
+    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data">
     {% endif %}
+    
         {% csrf_token %}
         {{ form.as_p }}
 
         <div>
-            <input type="submit" id="anothernewphoto" name="anothernewphoto" value="Another photo">
+            <input type="submit" id="anotherphoto" name="anotherphoto" value="Another photo">
         </div>
 
         <div>

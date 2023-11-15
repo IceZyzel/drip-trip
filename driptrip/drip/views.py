@@ -195,6 +195,8 @@ def all_my_products(request):
         return render(request, 'drip/all_my_products.html', context)
         
 def editproduct(request, product): 
+    sizes_forms = []
+
     if request.method == "GET":        
         product_to_edit = Product.objects.get(id = product)
 
@@ -218,6 +220,8 @@ def editproduct(request, product):
     else:     
         item = Product.objects.get(id = product)
         form = CreateProductForm(request.POST, instance=item)
+
+        
 
         if form.is_valid():
             form.save()
@@ -315,7 +319,6 @@ def addphoto(request, product):
                 if request.POST.get('anotherphoto') == 'Another photo':
                     return redirect('newphoto', product)
                 elif request.POST.get('submit-button') == 'Submit':
-                    print("lllll")
                     return redirect('editproduct', product)
             else:
                 print(form.errors)
