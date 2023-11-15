@@ -165,35 +165,96 @@ def exit(request):
     }
     return render(request, 'drip/home.html', context)
 
-def productedit(request):
-
-    context = {
-        # 'name' : "",
-        # 'price' : "",
-        # 'brand' : "",
-        # 'description' : "",
-        # 'sex' : "",
-        # 'category' : "",
-        # 'userclirent' : ""
-    }
-
+def newproduct(request):
     if request.method == "GET":
-        return render(request, 'drip/productedit.html')
+        return render(request, 'drip/newproduct.html')
     else:
         form = CreateProductForm (request.POST)
 
         if request.user.is_authenticated:
             if form.is_valid():
-                form.instance.userclient_id = request.user.id
+                form.instance.user_id = request.user.id
                 p = form.save()
                 new_id = p.id
                 return render(request, 'drip/newsize.html', {'product' : new_id})
             else:
                 print(form.errors)
-                return render(request, 'drip/productedit.html', context)
+                return render(request, 'drip/newproduct.html')
+        else:
+            return redirect('Userlogin')
+        
+def all_my_products(request):
+    products = Product.objects.filter(user = request.user.id)
+
+    context = {
+        'sign': request.user.is_authenticated,
+        'products': products,  
+    }
+
+    if request.method == "GET":
+        return render(request, 'drip/all_my_products.html', context)
+        
+def editproduct(request, product): 
+    if request.method == "GET":        
+        product_to_edit = Product.objects.get(id = product)
+
+        sizes = Size.objects.filter(product = product_to_edit)
+        sizes_forms = []
+        for s in sizes:
+            sizes_forms.append((AddNewSize(instance=s), s.pk))
+
+        photos = PhotoProduct.objects.filter(product = product_to_edit)
+        photos_forms = []
+        for ph in photos:
+            photos_forms.append((AddNewPhoto(instance=ph), ph.pk))
+
+        context = {
+            'product_to_edit': product_to_edit,
+            'sizes_forms': sizes_forms,
+            'photos_forms' : photos_forms
+        }
+
+        return render(request, 'drip/editproduct.html', context)
+    else:     
+        item = Product.objects.get(id = product)
+        form = CreateProductForm(request.POST, instance=item)
+
+        if form.is_valid():
+            form.save()
+
+        return redirect('all_my_products')
+    
+def deleteproduct(request, product):
+    product_to_delete = Product.objects.get(id = product)
+    product_to_delete.delete()
+    return redirect('all_my_products')
+
+def addsize(request, product):
+     context = {
+        'product' : product,
+        'flag' : True
+     }
+
+     if request.method == "GET":
+        return render(request, 'drip/newsize.html', context)
+     else:
+        form = AddNewSize (request.POST)
+
+        if request.user.is_authenticated:
+            if form.is_valid():
+                form.instance.product_id = product
+                form.save()
+
+                if request.POST.get('anothersize') == 'Another size':
+                    return render(request, 'drip/newsize.html', context)
+                elif request.POST.get('submit-button') == 'Submit':            
+                    return redirect('editproduct', product)
+
+            else:
+                print(form.errors)
+                return render(request, 'drip/newsize.html', context)
         else:
             return redirect('login')
-        
 
 def newsize(request, product):
      context = {
@@ -221,6 +282,47 @@ def newsize(request, product):
         else:
             return redirect('login')
         
+def deletesize(request, size):
+    size_to_delete = Size.objects.get(pk = size)
+    product = size_to_delete.product.pk
+    size_to_delete.delete()
+    return redirect('editproduct', product)
+
+def addphoto(request, product):    
+    if request.method == "GET":
+        form = AddNewPhoto()
+
+        context = {
+            'product' : product,
+            'form' : form,
+            'flag' : True,
+        }
+
+        return render(request, 'drip/newphoto.html', context)
+    else:
+        context = {
+            'product' : product,
+            'flag' : True,
+        }
+
+        form = AddNewPhoto (request.POST, request.FILES)
+
+        if request.user.is_authenticated:
+            if form.is_valid():
+                form.instance.product_id = product
+                form.save()
+                
+                if request.POST.get('anotherphoto') == 'Another photo':
+                    return redirect('newphoto', product)
+                elif request.POST.get('submit-button') == 'Submit':
+                    print("lllll")
+                    return redirect('editproduct', product)
+            else:
+                print(form.errors)
+                return redirect('newphoto', product)
+        else:
+            return redirect('login')    
+        
 def newphoto(request, product):    
     if request.method == "GET":
         form = AddNewPhoto()
@@ -236,12 +338,7 @@ def newphoto(request, product):
             'product' : product,
         }
 
-        print(request.POST)
-        print(request.FILES)
-
         form = AddNewPhoto (request.POST, request.FILES)
-
-
 
         if request.user.is_authenticated:
             if form.is_valid():
@@ -251,10 +348,16 @@ def newphoto(request, product):
                 if request.POST.get('anotherphoto') == 'Another photo':
                     return redirect('newphoto', product)
                 elif request.POST.get('submit-button') == 'Submit':
-                    return render(request, 'drip/home.html', context)
+                    return redirect('home')
             else:
                 print(form.errors)
                 return redirect('newphoto', product)
         else:
             return redirect('login')    
+        
+def deletephoto(request, photo):
+    photo_to_delete = Size.objects.get(pk = photo)
+    product = photo_to_delete.product.pk
+    photo_to_delete.delete()
+    return redirect('editproduct', product)
 
