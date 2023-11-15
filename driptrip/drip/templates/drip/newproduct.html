@@ -1,0 +1,86 @@
+{% load static %}
+{% include "drip/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/newproduct.css' %}" >
+</head>
+<body>
+    <div class="container">
+        <form action= "{% url 'newproduct' %}" method="post">     
+            {% csrf_token %}       
+            <div>
+                <label for="name">Product name</label>
+                <input type="text" id="name" name="name" required><br>
+            </div>            
+            <div>
+                <label for="name">Price</label>
+                <input type="text" id="price" name="price" required><br>
+            </div>
+
+            <div>
+                <label for="name">Brand</label>
+                <input type="text" id="brand" name="brand" required><br>
+            </div>
+
+            <div>
+                <label for="name">Description</label>
+                <input type="text" id="description" name="description" required><br>
+            </div>
+
+            <div>
+                <select id="sex" name="sex" required>
+                    
+                    <option value="M">Male</option>
+
+                    <option value="F">Female</option>
+
+                    <option value="U">Unisex</option>
+                </select>
+            </div>
+
+            <div>
+                <select type="text" id="category" name="category" required><br>
+
+                    <option value="Shoes">Shoes</option>
+
+                    <option value="Accessories">Accessories</option>
+
+                    <option value="Activewear">Activewear</option>
+
+                    <option value="Outerwear">Outerwear</option>
+
+                    <option value="Formal Wear">Formal Wear</option>
+
+                    <option value="Casual Wear">Casual Wear</option>
+
+                    <option value="Underwear">Underwear</option>
+
+                    <option value="Swimwear">Swimwear</option>
+
+                    <option value="Vintage Clothing">Vintage Clothing</option>
+
+                    <option value="Maternity Wear">Maternity Wear</option>
+
+                    <option value="Sportswear">Sportswear</option>
+
+                    <option value="Sleepwear">Sleepwear</option>
+
+                    <option value="Workwear">Workwear</option>
+
+                    <option value="Ethical and Sustainable Fashion">Ethical and Sustainable Fashion</option>
+
+                    <option value="Costumes and Cosplay">Costumes and Cosplay</option>
+
+                    <option value="Designer Clothing">Designer Clothing</option>
+            </div>
+
+            <div>
+                <input type="submit" id="submit-button" name="submit-button" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

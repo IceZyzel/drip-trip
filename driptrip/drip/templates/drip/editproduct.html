@@ -1,0 +1,110 @@
+{% load static %}
+{% include "drip/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/editproduct.css' %}" >
+</head>
+<body>
+    <div class="container">
+        <form action= "{% url 'editproduct' product_to_edit.pk  %}" enctype="multipart/form-data" method="post">     
+            {% csrf_token %}    
+            <div>
+                <label for="name">Product name</label>
+                <input type="text" id="name" name="name" value="{{ product_to_edit.name }}" required><br>
+            </div>            
+            <div>
+                <label for="name">Price</label>
+                <input type="text" id="price" name="price"value="{{ product_to_edit.price }}" required><br>
+            </div>
+
+            <div>
+                <label for="name">Brand</label>
+                <input type="text" id="brand" name="brand" value="{{ product_to_edit.brand }}" required><br>
+            </div>
+
+            <div>
+                <label for="name">Description</label>
+                <input type="text" id="description" name="description" value="{{ product_to_edit.description }}" required><br>
+            </div>
+
+            <div>
+                <select id="sex" name="sex" required>
+                    
+                    <option value="M" {% if product_to_edit.sex == "M" %} selected {%endif%} >Male</option>
+
+                    <option value="F" {% if product_to_edit.sex == "F" %} selected {%endif%}>Female</option>
+
+                    <option value="U" {% if product_to_edit.sex == "U" %} selected {%endif%}>Unisex</option>
+                </select>
+            </div>
+
+            <div>
+                <select type="text" id="category" name="category" required><br>
+
+                    <option value="Shoes" {% if product_to_edit.category == "Shoes" %} selected {%endif%}>Shoes</option>
+
+                    <option value="Accessories" {% if product_to_edit.category == "Accessories" %} selected {%endif%}>Accessories</option>
+
+                    <option value="Activewear" {% if product_to_edit.ategory == "Activewear" %} selected {%endif%}>Activewear</option>
+
+                    <option value="Outerwear" {% if product_to_edit.category == "Outerwear" %} selected {%endif%}>Outerwear</option>
+
+                    <option value="Formal Wear" {% if product_to_edit.category == "Formal Wear" %} selected {%endif%}>Formal Wear</option>
+
+                    <option value="Casual Wear" {% if product_to_edit.category == "Casual Wear" %} selected {%endif%}>Casual Wear</option>
+
+                    <option value="Underwear" {% if product_to_edit.category == "Underwear" %} selected {%endif%}>Underwear</option>
+
+                    <option value="Swimwear" {% if product_to_edit.category == "Swimwear" %} selected {%endif%}>Swimwear</option>
+
+                    <option value="Vintage Clothing"  {% if product_to_edit.category == "Vintage Clothing" %} selected {%endif%}>Vintage Clothing</option>
+
+                    <option value="Maternity Wear" {% if product_to_edit.category == "Maternity Wear" %} selected {%endif%}>Maternity Wear</option>
+
+                    <option value="Sportswear" {% if product_to_edit.category == "Sportswear" %} selected {%endif%}>Sportswear</option>
+
+                    <option value="Sleepwear" {% if product_to_edit.category == "Sleepwear" %} selected {%endif%}>Sleepwear</option>
+
+                    <option value="Workwear" {% if product_to_edit.category == "Workwear" %} selected {%endif%}>Workwear</option>
+
+                    <option value="Ethical and Sustainable Fashion" {% if product_to_edit.category == "Ethical and Sustainable Fashion" %} selected {%endif%}>Ethical and Sustainable Fashion</option>
+
+                    <option value="Costumes and Cosplay" {% if product_to_edit.category == "Costumes and Cosplay" %} selected {%endif%}>Costumes and Cosplay</option>
+
+                    <option value="Designer Clothing" {% if product_to_edit.category == "Designer Clothing" %} selected {%endif%}>Designer Clothing</option>
+            </div>
+
+            <div>
+                {% for s in sizes_forms %}
+                    {% csrf_token %}
+                    {{s.0.as_p}}
+
+                    <a href="{% url 'deletesize' s.1 %}"> Delete Size </a> 
+
+                {% endfor %}
+
+                <a href="{% url 'addsize' product_to_edit.pk %}"> New Size </a> 
+            </div>
+
+            <div>
+                {% for ph in photos_forms %}
+                    {% csrf_token %}
+                    <img src="{{ ph.0.instance.photolink.url }}" alt="Photo">
+
+                    <a href="{% url 'deletephoto' ph.1 %}"> Delete Photo </a> 
+
+                {% endfor %}
+
+                <a href="{% url 'addphoto' product_to_edit.pk %}"> New photo </a> 
+            </div>
+
+            <div>
+                <input type="submit" id="submit-button" name="submit-button" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
