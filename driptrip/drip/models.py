@@ -63,12 +63,9 @@ class Review (models.Model):
 class Order (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     usercourier = models.ForeignKey(UserCourier,on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=64)
-    phone_number = models.CharField(max_length=12)
     adress = models.CharField(max_length=64)
     date = models.DateField()
     status = models.CharField(max_length=64)
-    
 
 class OrderProduct (models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
