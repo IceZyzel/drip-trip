@@ -53,6 +53,30 @@ def register(request):
             return render(request, 'drip/register.html')
 
 
+def product(request, id, selected_image_id = None):
+
+    product = Product.objects.get(id = id)
+    product_photos = PhotoProduct.objects.filter(product_id = id)
+    sizes = Size.objects.filter(product_id = id)
+    seller = User.objects.get(id=product.userclient_id)
+
+    if (selected_image_id==None):
+        main_photo = product_photos.first()
+    else:
+        main_photo = product_photos.get(id = selected_image_id)
+
+    context = {
+        'product': product,
+        'product_photos': product_photos,
+        'main_photo': main_photo,
+        'sizes': sizes,
+        'seller':seller,
+    }
+
+
+    return render(request,'drip/product.html', context)
+
+
 def cart(request):
 
     #получаем id последнего заказа
@@ -69,6 +93,7 @@ def cart(request):
     #текущая дата
     date = datetime.now()
     
+    #получаем фото товаров
     product_photos = PhotoProduct.objects.all()
     
 
@@ -90,7 +115,7 @@ def cart(request):
     return render(request, 'drip/cart.html',context) 
 
 def add_to_cart(request,id):
-    
+    if request.method == 'POST':
         if not request.session.get('cart'):
             request.session['cart']=list()
         else:
@@ -114,7 +139,7 @@ def add_to_cart(request,id):
             request.session['cart'].append(add_data)
             request.session.modified = True
         
-        return render(request,'drip/cart.html')
+    return redirect(request.POST.get('url_from'))
 
 def remove_from_cart(request,id):
 
