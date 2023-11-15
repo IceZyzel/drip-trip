@@ -82,7 +82,13 @@
                 {% for product in products %}
                 <div class="product">
                     <a href="/product/{{product.id}}">
-                        <img src="{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}">
+
+                        {% for product_photo in product_list %}
+                        
+                        {% if product.id == product_photo.product_photo.product_id %}
+                        <img src="/media/{{product_photo.product_photo.photolink}}" alt="{{ product.name }}" width="200px" height="200px">
+                        {% endif %}
+                        {% endfor %}
                         <h3>{{ product.name }}</h3>
                         <div class="description">
                             <p class="price">{{ product.price }} ₴</p>
