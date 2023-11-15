@@ -12,10 +12,18 @@ def home(request, sex_filter = None):
         products = Product.objects.all()  # Извлекаем все продукты
     else:
         products = Product.objects.filter(sex=sex_filter)  # Извлекаем продукты по фильтру
-    
+   
+    product_list = []
+
+    for product in products:
+        product_photo = PhotoProduct.objects.filter(product_id = product.id).first()
+        product_list.append({'product_photo':product_photo})
+        
+
     context = {
         'sign': request.user.is_authenticated,
         'products': products,  # Добавляем переменную products в контекст
+        'product_list': product_list,
     }
     return render(request, 'drip/home.html', context)
 
@@ -58,7 +66,7 @@ def product(request, id, selected_image_id = None):
     product = Product.objects.get(id = id)
     product_photos = PhotoProduct.objects.filter(product_id = id)
     sizes = Size.objects.filter(product_id = id)
-    seller = User.objects.get(id=product.userclient_id)
+    seller = User.objects.get(id=product.user_id)
 
     if (selected_image_id==None):
         main_photo = product_photos.first()
@@ -84,7 +92,7 @@ def cart(request):
     if latest_order is not None:
         order_id = latest_order.id+1
     else:
-        order_id = None
+        order_id = 1
 
     #получаем корзину
     cart = request.session.get('cart',{})  
@@ -100,7 +108,9 @@ def cart(request):
     for item_id in cart:
         product_id = item_id.get('id')
         product = get_object_or_404(Product, id=product_id)
-        product_list.append({'product': product,})   
+        seller = User.objects.get(id=product.user_id)
+        product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
+        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo})   
 
     
     context ={
@@ -157,6 +167,19 @@ def remove_from_cart(request,id):
 
     return redirect('cart')
 
+def delete_cart(request):
+    if request.session.get('cart'):
+        del request.session.cart
+    return redirect(request.POST.get('url_from'))
+
+def create_order(request):
+    if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        phone_number = request.POST.get('phone_number')
+        address = request.POST.get('address')
+
+    return redirect(request.POST.get('url_from'))
+
 def exit(request):
     logout(request)
 
@@ -165,11 +188,7 @@ def exit(request):
     }
     return render(request, 'drip/home.html', context)
 
-def newproduct(request):
-    if request.method == "GET":
-        return render(request, 'drip/newproduct.html')
-    else:
-        form = CreateProductForm (request.POST)
+def productedit(request):
 
         if request.user.is_authenticated:
             if form.is_valid():

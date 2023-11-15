@@ -3,8 +3,9 @@
     "",
     "\\driptrip",
     "\\driptrip\\drip",
-    "\\driptrip\\driptrip"
+    "\\driptrip\\drip\\templates",
+    "\\driptrip\\drip\\templates\\drip"
   ],
-  "SelectedNode": "\\driptrip",
+  "SelectedNode": "\\driptrip\\drip\\models.py",
   "PreviewInSolutionExplorer": false
 }

@@ -8,22 +8,14 @@
     {% for product in product_list %}
 
     <div class="cart-product">
-        {% with first_match_found=False %}
-        {% for photo in product_photos %}
-        {% if photo.product_id == product.product.id and not first_match_found %}
-        <img src="/media/{{ photo.photolink }}" alt="Photo">
-        {% with first_match_found=True %}
-        {% endwith %}
-        {% endif %}
-        {% endfor %}
-        {% endwith %}
-        <div class="cart-product-info">
-            <h3>{{ product.product.name }}</h3>
+        <img src="/media/{{ product.product_photo.photolink }}" alt="Photo">
 
+        <div class="cart-product-info">
+            <a href="/product/{{product.product.id}}"><h3>{{ product.product.name }}</h3></a>
             <p class="cart-size">Size: 31</p>
             <p> <a href="/remove_from_cart/{{product.product.id}}">Delete</a></p>
             <div>
-                <p>{{ product.product.brand }}</p>
+                <p>{{ product.seller.username }}</p>
                 <p class="cart-price">{{ product.product.price }} ₴</p>
             </div>
         </div>
@@ -34,18 +26,19 @@
 
     <hr>
     <div>
-        <form action="/cart" method="POST">
+        <form action="{% url 'create_order' %}" method="POST">
             <div>
                 <p>Contact Information</p>
-                <input type="text" id="contactInforamtion" name="contactInforamtion" placeholder="" required>
+                <input type="text" id="full_name" name="full_name" placeholder="Full name" required>
+                <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" required>
             </div>
             <div>
                 <p>Delivery Address</p>
-                <input type="password" id="address" name="adress" placeholder="" required>
+                <input type="text" id="address" name="adress" placeholder="Address" required>
             </div>
             <div>
-                <input type="submit" value="Delivery">
-                <input type="submit">
+                <input type="submit" value="Purchase" >
+                <input type="button" value="Cancel">
             </div>
         </form>
     </div>
