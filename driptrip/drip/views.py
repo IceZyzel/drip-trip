@@ -12,7 +12,7 @@ def home(request, sex_filter = None):
         products = Product.objects.all()  # Извлекаем все продукты
     else:
         products = Product.objects.filter(sex=sex_filter)  # Извлекаем продукты по фильтру
-    
+   
     product_list = []
 
     for product in products:
@@ -66,7 +66,7 @@ def product(request, id, selected_image_id = None):
     product = Product.objects.get(id = id)
     product_photos = PhotoProduct.objects.filter(product_id = id)
     sizes = Size.objects.filter(product_id = id)
-    seller = User.objects.get(id=product.userclient_id)
+    seller = User.objects.get(id=product.user_id)
 
     if (selected_image_id==None):
         main_photo = product_photos.first()
@@ -108,7 +108,7 @@ def cart(request):
     for item_id in cart:
         product_id = item_id.get('id')
         product = get_object_or_404(Product, id=product_id)
-        seller = User.objects.get(id=product.userclient_id)
+        seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
         product_list.append({'product': product,'seller':seller, 'product_photo': product_photo})   
 
@@ -166,6 +166,11 @@ def remove_from_cart(request,id):
     request.session.modified = True
 
     return redirect('cart')
+
+def delete_cart(request):
+    if request.session.get('cart'):
+        del request.session.cart
+    return redirect(request.POST.get('url_from'))
 
 def create_order(request):
     if request.method == 'POST':
