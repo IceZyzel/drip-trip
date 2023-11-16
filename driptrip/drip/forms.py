@@ -1,3 +1,5 @@
+from dataclasses import field
+from datetime import datetime
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
@@ -17,11 +19,15 @@ class LoginUserForm(forms.Form):
     username = UsernameField()
     password = forms.CharField()
 
-class CreateOrderForm(forms.ModelForm):
+class CreateOrderForm(forms.ModelForm):   
+    full_name = forms.CharField(max_length=64)
+    adress = forms.CharField(max_length=64)
+    phone_number = forms.CharField(max_length=64)   
+
     class Meta:
         model = Order
-        fields = ['photolink']
-        exclude = ['product']
+        fields = ['full_name', 'phone_number', 'adress','date']
+        
 
 class CreateProductForm(forms.ModelForm):
     class Meta:

@@ -1,3 +1,4 @@
+from os import truncate
 from django.db import models
 from django import forms
 from django.core.validators import MaxValueValidator
@@ -62,8 +63,10 @@ class Review (models.Model):
 
 class Order (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    usercourier = models.ForeignKey(UserCourier,on_delete=models.CASCADE)
+    usercourier = models.ForeignKey(UserCourier,on_delete=models.CASCADE, null=True)
     adress = models.CharField(max_length=64)
+    full_name = models.CharField(max_length=64)
+    phone_number = models.CharField(max_length=12) 
     date = models.DateField()
     status = models.CharField(max_length=64)
 
