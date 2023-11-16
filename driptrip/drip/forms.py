@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, Product, Size, PhotoProduct
+from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 
 
@@ -16,6 +16,12 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(forms.Form):
     username = UsernameField()
     password = forms.CharField()
+
+class CreateOrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['photolink']
+        exclude = ['product']
 
 class CreateProductForm(forms.ModelForm):
     class Meta:
@@ -34,3 +40,6 @@ class AddNewPhoto(forms.ModelForm):
         model = PhotoProduct
         fields = ['photolink']
         exclude = ['product']
+
+
+
