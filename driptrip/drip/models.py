@@ -38,7 +38,7 @@ class UserCourier (models.Model):
 class Product (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
-    price = models.CharField(max_length=64)
+    price = models.FloatField()
     brand = models.CharField(max_length=64)
     description = models.TextField(max_length=250)
     sex = models.CharField(max_length=1, choices=GENDER_CHOICES)
