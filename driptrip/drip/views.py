@@ -3,7 +3,7 @@ from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisterUserForm, LoginUserForm, CreateProductForm, AddNewSize, AddNewPhoto
+from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 
@@ -14,12 +14,18 @@ def home(request, sex_filter = None):
     else:
         products = Product.objects.filter(sex=sex_filter)  # Извлекаем продукты по фильтру
     
+    product_list = []
+
+    for product in products:
+        product_photo = PhotoProduct.objects.filter(product_id = product.id).first()
+        product_list.append({'product_photo':product_photo})
+        
     context = {
         'sign': request.user.is_authenticated,
         'products': products,  # Добавляем переменную products в контекст
+        'product_list': product_list,
     }
     return render(request, 'drip/home.html', context)
-
 
 def userlogin(request):
     if request.method == "GET":
@@ -59,7 +65,7 @@ def product(request, id, selected_image_id = None):
     product = Product.objects.get(id = id)
     product_photos = PhotoProduct.objects.filter(product_id = id)
     sizes = Size.objects.filter(product_id = id)
-    seller = User.objects.get(id=product.userclient_id)
+    seller = User.objects.get(id=product.user_id)
 
     if (selected_image_id==None):
         main_photo = product_photos.first()
@@ -85,24 +91,22 @@ def cart(request):
     if latest_order is not None:
         order_id = latest_order.id+1
     else:
-        order_id = None
-
+        order_id = 1
     #получаем корзину
     cart = request.session.get('cart',{})  
     product_list = []
-
     #текущая дата
     date = datetime.now()
     
     #получаем фото товаров
     product_photos = PhotoProduct.objects.all()
     
-
     for item_id in cart:
         product_id = item_id.get('id')
         product = get_object_or_404(Product, id=product_id)
-        product_list.append({'product': product,})   
-
+        seller = User.objects.get(id=product.user_id)
+        product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
+        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo})   
     
     context ={
         'cart_list': cart,
@@ -111,7 +115,6 @@ def cart(request):
         'future_order_id':order_id,
         'product_photos':product_photos
     }
-
     
     return render(request, 'drip/cart.html',context) 
 
@@ -157,6 +160,28 @@ def remove_from_cart(request,id):
     request.session.modified = True
 
     return redirect('cart')
+
+
+
+def create_order(request):
+    if request.method == 'POST':
+        form = CreateOrderForm(request.POST)
+        if(form.is_valid()):
+
+            form.save()
+        else:
+            error='Incorrect value of fields'
+
+            #добавить остальные поля для Order
+            
+        data = {
+            'form':form,
+            'error': error,
+        }
+
+    return redirect('cart') 
+
+
 
 def exit(request):
     logout(request)
