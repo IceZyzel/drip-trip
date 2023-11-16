@@ -95,7 +95,10 @@ def cart(request):
         order_id = 1
     #получаем корзину
     cart = request.session.get('cart',{})  
+   
     product_list = []
+
+    order_products = []
     #текущая дата
     date = datetime.now()
     form = CreateOrderForm()
@@ -108,20 +111,26 @@ def cart(request):
         product = get_object_or_404(Product, id=product_id)
         seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
-        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo})   
-
-    print(request.user.id)
+        orderproduct = OrderProduct(order_id = order_id, product_id = product_id)
+       
+        order_products.append(orderproduct)
+        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo })   
+    
+  
 
     if request.method == 'POST':
         if request.user.is_authenticated:
 
             form = CreateOrderForm(request.POST)
             form.instance.user_id = request.user.id
-            #form.instance.date = str(datetime.date)
             form.instance.status = 'New'
 
-            if(form.is_valid()):             
-                form.save()
+            if(form.is_valid()):   
+                form.save()   
+
+                for order_product in order_products:
+                    order_product.save()
+
                 del request.session['cart'] 
                 return redirect('home')
             else:
