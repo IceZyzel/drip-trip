@@ -39,7 +39,7 @@ class UserCourier (models.Model):
 class Product (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
-    price = models.CharField(max_length=64)
+    price = models.FloatField()
     brand = models.CharField(max_length=64)
     description = models.TextField(max_length=250)
     sex = models.CharField(max_length=1, choices=GENDER_CHOICES)
@@ -67,7 +67,7 @@ class Order (models.Model):
     adress = models.CharField(max_length=64)
     full_name = models.CharField(max_length=64)
     phone_number = models.CharField(max_length=12) 
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=64)
 
 class OrderProduct (models.Model):

@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
@@ -85,7 +86,7 @@ def product(request, id, selected_image_id = None):
 
 
 def cart(request):
-
+ 
     #получаем id последнего заказа
     latest_order = Order.objects.order_by('-id').first()
     if latest_order is not None:
@@ -97,7 +98,8 @@ def cart(request):
     product_list = []
     #текущая дата
     date = datetime.now()
-    
+    form = CreateOrderForm()
+
     #получаем фото товаров
     product_photos = PhotoProduct.objects.all()
     
@@ -107,16 +109,41 @@ def cart(request):
         seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
         product_list.append({'product': product,'seller':seller, 'product_photo': product_photo})   
+
+    print(request.user.id)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+
+            form = CreateOrderForm(request.POST)
+            form.instance.user_id = request.user.id
+            #form.instance.date = str(datetime.date)
+            form.instance.status = 'New'
+
+            if(form.is_valid()):             
+                form.save()
+                del request.session['cart'] 
+                return redirect('home')
+            else:
+                print(form.errors)
+                error='Incorrect value of fields'
+        else:
+            return redirect('Userlogin')
     
+        
     context ={
         'cart_list': cart,
         'product_list': product_list,
         'date':date,
         'future_order_id':order_id,
-        'product_photos':product_photos
+        'product_photos':product_photos,
+        'form':form,
     }
     
+    
     return render(request, 'drip/cart.html',context) 
+
+
 
 def add_to_cart(request,id):
     if request.method == 'POST':
@@ -163,22 +190,9 @@ def remove_from_cart(request,id):
 
 
 
-def create_order(request):
-    if request.method == 'POST':
-        form = CreateOrderForm(request.POST)
-        if(form.is_valid()):
-
-            form.save()
-        else:
-            error='Incorrect value of fields'
-
-            #добавить остальные поля для Order
-            
-        data = {
-            'form':form,
-            'error': error,
-        }
-
+def delete_cart(request):
+    if request.session.get('cart'): 
+        del request.session['cart']  
     return redirect('cart') 
 
 

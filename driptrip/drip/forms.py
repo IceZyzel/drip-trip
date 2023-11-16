@@ -1,5 +1,6 @@
 from dataclasses import field
 from datetime import datetime
+from multiprocessing import Value
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
@@ -20,20 +21,25 @@ class LoginUserForm(forms.Form):
     password = forms.CharField()
 
 class CreateOrderForm(forms.ModelForm):   
-    full_name = forms.CharField(max_length=64)
-    adress = forms.CharField(max_length=64)
-    phone_number = forms.CharField(max_length=64)   
+    full_name = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Full name'}))
+    adress = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Address'}))
+    phone_number = forms.CharField(max_length=12, widget=forms.TextInput(attrs={'placeholder': '0505005555'}))
+
 
     class Meta:
         model = Order
-        fields = ['full_name', 'phone_number', 'adress','date']
+        fields = ['adress', 'full_name', 'phone_number']
+        exclude = ['User', 'usercourier','date', 'status']
         
+
 
 class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'brand', 'description', 'sex', 'category']
         exclude = ['User']
+
+    
 
 class AddNewSize(forms.ModelForm):
     class Meta:
