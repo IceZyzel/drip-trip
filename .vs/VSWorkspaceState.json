@@ -4,10 +4,9 @@
     "\\driptrip",
     "\\driptrip\\drip",
     "\\driptrip\\drip\\migrations",
-    "\\driptrip\\drip\\templates",
     "\\driptrip\\drip\\templates\\drip",
     "\\driptrip\\media"
   ],
-  "SelectedNode": "\\driptrip\\drip\\migrations\\0011_alter_order_usercourier.py",
+  "SelectedNode": "\\driptrip\\drip\\models.py",
   "PreviewInSolutionExplorer": false
 }
