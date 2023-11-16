@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
@@ -245,6 +246,19 @@ def editproduct(request, product):
     else:     
         item = Product.objects.get(id = product)
         form = CreateProductForm(request.POST, instance=item)
+
+        count = 0
+
+        size_list = request.POST.getlist('size')
+        count_list = request.POST.getlist('count')
+        print(size_list)
+        print(count_list)
+
+        for size in Size.objects.filter(product=item):
+            size_form = AddNewSize({'size': size_list[count], 'count': count_list[count]}, instance=size)
+            if size_form.is_valid():
+                size_form.save()
+                count += 1
 
         if form.is_valid():
             form.save()
