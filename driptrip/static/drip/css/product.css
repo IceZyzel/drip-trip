@@ -1,0 +1,127 @@
+/* Стиль для головного фото */
+.MainPhoto {
+    width: 250px; /* Ширина фото */
+    height: 250px; /* Висота фото */
+    margin-top: 30px; /* Відстань від верху */
+    margin-left: 400px; /* Відстань від лівого краю */
+}
+
+/* Стиль для інших фото в галереї */
+.ProductPhoto {
+    width: 100px; /* Ширина фото */
+    height: 100px; /* Висота фото */
+    margin-top: 170px; /* Відстань від верху */
+    margin-left: 400px; /* Відстань від лівого краю */
+}
+
+.descriptionСontainer {
+    margin-top: 100px; /* Відступ від верху */
+    margin-left: 400px; /* Відступ від лівого краю */
+    width: 24%; /* Ширина блоку опису */
+    height: 300px; /* Фіксована висота блоку */
+    font-size: 16px; /* Розмір шрифту */
+    line-height: 1.5; /* Міжрядковий інтервал */
+    text-align: justify; /* Вирівнювання тексту по ширині блоку */
+    border: 1px solid black; /* Додаємо рамку */
+    padding: 15px; /* Додаємо внутрішній відступ для контенту */
+}
+
+
+.productName {
+    margin-top: -950px; /* Відступ від верху */
+    margin-left: 1200px; /* Відступ від лівого краю */
+    font-size: 24px; /* Розмір шрифту */
+}
+
+.productBrand{
+    margin-top: -20px; /* Відступ від верху */
+    margin-left: 1200px; /* Відступ від лівого краю */
+    font-size: 24px; /* Розмір шрифту */
+}
+
+.productSex{
+    margin-top: -20px; /* Відступ від верху */
+    margin-left: 1200px; /* Відступ від лівого краю */
+    font-size: 24px; /* Розмір шрифту */
+}
+
+.productPrice{
+    margin-top: -10px; /* Відступ від верху */
+    margin-left: 1200px; /* Відступ від лівого краю */
+    font-size: 24px; /* Розмір шрифту */
+}
+
+.Size{
+    margin-top: 0px; /* Відступ від верху */
+    margin-left: 1200px; /* Відступ від лівого краю */
+    font-size: 24px; /* Розмір шрифту */  
+}
+
+.size-container {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 1200px;
+}
+
+.size-item {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    margin-right: 20px; /* Відступ від лівого краю для кожного елементу */
+    margin-top: 5px; /* Відступ від верху для кожного елементу */
+}
+
+/* Стиль для кнопки "Add to Cart" */
+.AddToCartButton {
+    color: white;
+    background-color: black; /* Синій колір фону (можна змінити на бажаний) */
+    border: none;
+    padding: 20px 80px;
+    margin-top: 30px;
+    margin-left: 1200px;
+ 
+}
+
+.WriteReviewButton {
+    color: white;
+    background-color: grey; /* Зелений колір фону (можна змінити на бажаний) */
+    border: none;
+    padding: 15px 55px;
+    margin-top: 45px;
+    margin-left: 1215px;
+
+}
+
+.SellerBlock {
+    font-size: 32px;
+    position: relative;
+    top: 150px; /* Відстань від верху */
+    left: 1200px; /* Відстань від лівого краю */
+    border: 2px solid black; /* Чорна рамка */
+    padding: 10px; /* Внутрішній відступ для контенту */
+    width: 300px; /* Ширина блоку .SellerBlock */
+    height: 120px; /* Висота блоку .SellerBlock */
+    text-align: center; /* Вирівнювання тексту вправо */
+}
+
+
+.ShowContactButton {
+    position: absolute;
+    top: 80px; /* Відстань від верху всередині .SellerBlock */
+    right: 80px;
+    color: white;
+    background-color: grey;
+    width: 150px; /* Ширина кнопки */
+    height: 35px; /* Висота кнопки */
+}
+
+/* Якщо потрібно змінювати розміри та розташування при різних розмірах екрану, можна використовувати media-запити */
+@media (max-width: 768px) {
+    .descriptionСontainer {
+        width: 100%; /* При зменшенні ширини екрану, блок розтягується на всю ширину */
+        margin-left: 0; /* Зменшення відступу від лівого краю */
+    }
+}
