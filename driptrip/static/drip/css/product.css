@@ -74,6 +74,10 @@
     margin-top: 5px; /* Відступ від верху для кожного елементу */
 }
 
+.size-item:hover {
+    background-color: #eee; /* Зміна кольору фону при наведенні */
+}
+
 /* Стиль для кнопки "Add to Cart" */
 .AddToCartButton {
     color: white;
