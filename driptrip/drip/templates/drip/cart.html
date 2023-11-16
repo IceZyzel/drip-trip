@@ -26,22 +26,24 @@
 
     <hr>
     <div>
-        <form action="{% url 'create_order' %}" method="POST">
+        <form action="{% url 'cart' %}" method="POST">
             {% csrf_token %}
             <div>
-                <input type="hidden" id="id" name="id" placeholder="Phone number" required>
                 <p>Contact Information</p>
-                <input type="text" id="full_name" name="full_name" for="{{form.full_name}}" placeholder="Full name" required>
-                <input type="text" id="phone_number" name="phone_number" for="{{form.phone_number}}" placeholder="Phone number" required>
+                <label for="id_full_name">Full Name:</label>
+                {{form.full_name}}
+                <label for="id_phone_number">Phone Number:</label>
+                {{form.phone_number}}
             </div>
             <div>
                 <p>Delivery Address</p>
-                <input type="text" id="address" name="adress" for="{{form.adress}}" placeholder="Address" required>
+                <label for="id_address">Address:</label>
+                {{form.adress}}
             </div>
             <div>
-                <span>{{data.error}}</span>
+                <span>{{error}}</span>
                 <input type="submit" value="Purchase" >
-                <input type="button" value="Cancel">
+                <input type="button" value="Cancel" onclick="window.location.href='/'">
             </div>
         </form>
     </div>
