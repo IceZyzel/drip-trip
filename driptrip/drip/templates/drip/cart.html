@@ -12,7 +12,7 @@
 
         <div class="cart-product-info">
             <a href="/product/{{product.product.id}}"><h3>{{ product.product.name }}</h3></a>
-            <p class="cart-size">Size: 31</p>
+            <p class="cart-size">Size: {{product.size.size}}</p>
             <p> <a href="/remove_from_cart/{{product.product.id}}">Delete</a></p>
             <div>
                 <p>{{ product.seller.username }}</p>

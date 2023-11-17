@@ -12,14 +12,18 @@
 
         <! -- Images -->
         <div class="MainPhoto">
+<<<<<<< HEAD
             <img src="/media/{{main_photo.photolink}}" alt="Main Image" width="500px" height="400px"/>
+=======
+            <img src="/media/{{main_photo.photolink}}" alt="Main Image" width="500px" height="380px" />
+>>>>>>> cea1fab4994c39de5a93f72d671ab6a6039b8745
         </div>
         <div>
             {% for photo in product_photos %}
-                <img class="ProductPhoto" src="/media/{{photo.photolink}}" alt="All Images" width="100px" height="100px" />
+            <img class="ProductPhoto" src="/media/{{photo.photolink}}" alt="All Images" width="100px" height="100px" />
             {% endfor %}
         </div>
-        
+
 
         <! -- Desription -->
         <div class="descriptionСontainer">{{product.description}}</div>
@@ -31,20 +35,20 @@
             <p class="productSex">{{product.sex}}</p>
             <p class="productPrice">{{product.price}}</p>
             <p class="Size">Size</p>
-            
-            <div class="size-container">
-                {% for size in sizes %}
-                    <div class="size-item">{{ size.size }}</div>
-                {% endfor %}
-            </div>
-            
 
-            <form action="{% url 'add_to_cart' id=product.id %}" method="post">
+            <div class="size-container">               
+                {% for size in sizes %}
+                <a class="size-item" href="{% url 'product' product.id size.id %}" >{{ size.size }}</a>
+                {% endfor %}      
+            </div>
+
+
+            <form action="{% url 'add_to_cart' id=product.id size_id=selected_size_id %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="url_from" value="{{request.path}}" />
                 <input type="submit" name="add_to_cart" value="Add to Cart" class="AddToCartButton" />
-            </form> 
-            
+            </form>
+
             <input type="button" name="write_review" value="Write a review" class="WriteReviewButton" />
         </div>
 
@@ -53,7 +57,7 @@
             <p class="SellerText">Seller: {{seller.username}}</p>
             <input type="button" name="show_contact" value="Show Contact" class="ShowContactButton" />
         </div>
-        
+
 
         <div class="reviews-section">
             <div class="reviews-container">
