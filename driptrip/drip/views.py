@@ -1,5 +1,7 @@
 from asyncio.windows_events import NULL
 from datetime import datetime
+from pickle import NONE
+from types import NoneType
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -61,24 +63,28 @@ def register(request):
             return render(request, 'drip/register.html')
 
 
-def product(request, id, selected_image_id = None):
+def product(request, id, size_id=None ,selected_image_id = None):
 
     product = Product.objects.get(id = id)
     product_photos = PhotoProduct.objects.filter(product_id = id)
     sizes = Size.objects.filter(product_id = id)
     seller = User.objects.get(id=product.user_id)
+    selected_size_id = size_id
+
 
     if (selected_image_id==None):
         main_photo = product_photos.first()
     else:
         main_photo = product_photos.get(id = selected_image_id)
 
+    
     context = {
         'product': product,
         'product_photos': product_photos,
         'main_photo': main_photo,
         'sizes': sizes,
         'seller':seller,
+        'selected_size_id':selected_size_id,
     }
 
 
@@ -106,15 +112,21 @@ def cart(request):
     #получаем фото товаров
     product_photos = PhotoProduct.objects.all()
     
+    print(cart)
     for item_id in cart:
         product_id = item_id.get('id')
+        print(item_id)
+        size_id = item_id.get('size_id')
+        print(size_id)
+        size = Size.objects.get(id = size_id)
         product = get_object_or_404(Product, id=product_id)
         seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
         orderproduct = OrderProduct(order_id = order_id, product_id = product_id)
+        
        
         order_products.append(orderproduct)
-        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo })   
+        product_list.append({'product': product,'seller':seller, 'product_photo': product_photo ,'size':size})   
     
   
 
@@ -154,7 +166,10 @@ def cart(request):
 
 
 
-def add_to_cart(request,id):
+def add_to_cart(request, id, size_id='None' ):
+    #del request.session['cart']
+    #del request.session['cart']
+    #print(request.session['cart'])
     if request.method == 'POST':
         if not request.session.get('cart'):
             request.session['cart']=list()
@@ -162,23 +177,32 @@ def add_to_cart(request,id):
             request.session['cart'] = list(request.session['cart'])
 
         
+
         cart_ids_list = list()
         for item in request.session['cart']:
             cart_ids_list.append(item['id'])
+            cart_ids_list.append(item['size_id'])
 
-
+        
        # item_exist = next((item for item in request.session['cart'] if item["type"]==request.POST.get('type') and item["id"] == id), False)
-
+        
 
         add_data = {
-            #'type':request.POST.get('type'),
-            'id':id
-        }
+            'size_id':size_id,
+            'id':id,
+        }   
+        print(add_data['size_id'])
 
-        if id not in cart_ids_list :
-            request.session['cart'].append(add_data)
-            request.session.modified = True
+        if (add_data['size_id'] != 'None'):
+            print(add_data)
+            if size_id not in cart_ids_list:
+                #if size_id not in доделать (если такого размера еще нету в корзине, то можно добавить)
+                request.session['cart'].append(add_data)
+                request.session.modified = True
         
+
+        #del request.session['cart']
+        print(request.session['cart'])
     return redirect(request.POST.get('url_from'))
 
 def remove_from_cart(request,id):

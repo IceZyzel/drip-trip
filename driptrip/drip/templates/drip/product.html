@@ -11,43 +11,49 @@
     <div class="container">
 
         <! -- Images -->
-        <div><img src="/media/{{main_photo.photolink}}" alt="Main Image" width="400px" height="400px"/></div>
+        <div class="MainPhoto">
+            <img src="/media/{{main_photo.photolink}}" alt="Main Image" width="500px" height="380px" />
+        </div>
         <div>
             {% for photo in product_photos %}
-            <img src="/media/{{photo.photolink}}" alt="All Images" width="100px" height="100px" />
+            <img class="ProductPhoto" src="/media/{{photo.photolink}}" alt="All Images" width="100px" height="100px" />
             {% endfor %}
         </div>
 
+
         <! -- Desription -->
-        <div>{{product.description}}</div>
+        <div class="descriptionСontainer">{{product.description}}</div>
 
         <! -- Info, buttons -->
         <div>
-            <p><h2>{{product.name}}</h2></p>
-            <p>{{product.brand}}</p>
-            <p>{{product.sex}}</p>
-            <p>{{product.price}}</p>
-            <p>Size</p>
-            <div>
+            <p class="productName">{{ product.name }}</p>
+            <p class="productBrand">{{product.brand}}</p>
+            <p class="productSex">{{product.sex}}</p>
+            <p class="productPrice">{{product.price}}</p>
+            <p class="Size">Size</p>
+
+            <div class="size-container">               
                 {% for size in sizes %}
-                <div>{{size.size}}</div>
-                {% endfor %}
+                <a class="size-item" href="{% url 'product' product.id size.id %}" >{{ size.size }}</a>
+                {% endfor %}      
             </div>
 
-            <form action="{% url 'add_to_cart' id=product.id %}" method="post">
+
+            <form action="{% url 'add_to_cart' id=product.id size_id=selected_size_id %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="url_from" value="{{request.path}}" />
-                <input type="submit" name="add_to_cart" value="Add to Cart" />
-            </form> 
-            
-            <input type="button" name="write_review" value="Write a review" />
+                <input type="submit" name="add_to_cart" value="Add to Cart" class="AddToCartButton" />
+            </form>
+
+            <input type="button" name="write_review" value="Write a review" class="WriteReviewButton" />
         </div>
 
         <! -- Seller Block -->
-        <div>
-            <p>Seller: {{seller.username}}</p>
-            <input type="button" name="show_contact" value="Show Contact" />
+        <div class="SellerBlock">
+            <p class="SellerText">Seller: {{seller.username}}</p>
+            <input type="button" name="show_contact" value="Show Contact" class="ShowContactButton" />
         </div>
+
 
         <! -- Reviews -->
         <div></div>

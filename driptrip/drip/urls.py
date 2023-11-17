@@ -9,6 +9,7 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('exit/', views.exit, name='exit'),
     path('product/<int:id>', views.product, name='product'),
+    path('product/<int:id>/<str:size_id>', views.product, name='product'),
     path('newproduct/', views.newproduct, name='newproduct'),
     path('all_my_products/', views.all_my_products, name='all_my_products'),
     path('editproduct/<int:product>', views.editproduct, name='editproduct'),
@@ -19,7 +20,7 @@ urlpatterns = [
     path('newsize/<int:product>', views.newsize, name='newsize'),
     path('addsize/<int:product>', views.addsize, name='addsize'),
     path('deletesize/<int:size>', views.deletesize, name='deletesize'),
-    path('add_to_cart/<int:id>', views.add_to_cart, name='add_to_cart'),
+    path('add_to_cart/<int:id>/<str:size_id>', views.add_to_cart, name='add_to_cart'),
     path('remove_from_cart/<int:id>', views.remove_from_cart, name='remove_from_cart'),
     path('<str:sex_filter>/', views.home, name='home'),
 ]

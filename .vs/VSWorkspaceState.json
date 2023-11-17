@@ -3,10 +3,13 @@
     "",
     "\\driptrip",
     "\\driptrip\\drip",
+    "\\driptrip\\driptrip",
     "\\driptrip\\drip\\templates",
     "\\driptrip\\drip\\templates\\drip",
-    "\\driptrip\\media"
+    "\\driptrip\\media",
+    "\\driptrip\\static\\drip",
+    "\\driptrip\\static\\drip\\css"
   ],
-  "SelectedNode": "\\driptrip\\drip\\templates\\drip\\productedit.html",
+  "SelectedNode": "\\driptrip\\drip\\views.py",
   "PreviewInSolutionExplorer": false
 }
