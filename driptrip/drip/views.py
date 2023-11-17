@@ -167,25 +167,18 @@ def cart(request):
 
 
 def add_to_cart(request, id, size_id='None' ):
-    #del request.session['cart']
-    #del request.session['cart']
-    #print(request.session['cart'])
     if request.method == 'POST':
         if not request.session.get('cart'):
             request.session['cart']=list()
         else:
             request.session['cart'] = list(request.session['cart'])
 
-        
-
         cart_ids_list = list()
         for item in request.session['cart']:
             cart_ids_list.append(item['id'])
             cart_ids_list.append(item['size_id'])
-
         
        # item_exist = next((item for item in request.session['cart'] if item["type"]==request.POST.get('type') and item["id"] == id), False)
-        
 
         add_data = {
             'size_id':size_id,

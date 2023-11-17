@@ -6,10 +6,8 @@
     "\\driptrip\\driptrip",
     "\\driptrip\\drip\\templates",
     "\\driptrip\\drip\\templates\\drip",
-    "\\driptrip\\media",
-    "\\driptrip\\static\\drip",
-    "\\driptrip\\static\\drip\\css"
+    "\\driptrip\\media"
   ],
-  "SelectedNode": "\\driptrip\\drip\\views.py",
+  "SelectedNode": "\\driptrip\\drip\\templates\\drip\\home.html",
   "PreviewInSolutionExplorer": false
 }
