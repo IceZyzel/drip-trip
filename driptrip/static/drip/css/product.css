@@ -6,12 +6,17 @@
     margin-left: 400px; /* Відстань від лівого краю */
 }
 
-/* Стиль для інших фото в галереї */
 .ProductPhoto {
     width: 100px; /* Ширина фото */
     height: 100px; /* Висота фото */
     margin-top: 170px; /* Відстань від верху */
     margin-left: 400px; /* Відстань від лівого краю */
+    margin-right: 100px; /* Відстань від правого краю (крім останньої фото) */
+}
+
+/* Відстань між фото (крім останньої) */
+.ProductPhoto:not(:last-child) {
+    margin-right: -305px;
 }
 
 .descriptionСontainer {
@@ -121,6 +126,91 @@
     width: 150px; /* Ширина кнопки */
     height: 35px; /* Висота кнопки */
 }
+
+
+
+
+.reviews-container {
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 550px; /* Додайте цей рядок для відступу зверху */
+}
+
+.reviews-header {
+    font-size: 45px;
+    margin: 0; /* Встановлення margin на нуль */
+    margin-bottom: 10px;
+    border: 3px solid black;
+    background-color: black; /* Чорний фон */
+    color: white; /* Білий текст */
+    box-sizing: border-box; /* Забезпечення, що padding і border враховуються в ширині */
+    text-align: center; /* Вирівнювання тексту по центру */
+}
+
+
+
+.reviews-summary {
+    margin-bottom: 20px;
+}
+
+
+.reviews-list {
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.review {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+.review-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.review-name {
+    font-weight: bold;
+}
+
+.review-rating {
+    display: inline-block;
+    font-size: 18px;
+    color: gold;
+}
+
+.review-rating::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+}
+
+.review-rating[data-rating="1"]::before {
+    content: '★☆☆☆☆';
+}
+
+.review-rating[data-rating="2"]::before {
+    content: '★★☆☆☆';
+}
+
+.review-rating[data-rating="3"]::before {
+    content: '★★★☆☆';
+}
+
+.review-rating[data-rating="4"]::before {
+    content: '★★★★☆';
+}
+
+.review-rating[data-rating="5"]::before {
+    content: '★★★★★';
+}
+
+.review-text {
+    margin: 0;
+}
+
 
 /* Якщо потрібно змінювати розміри та розташування при різних розмірах екрану, можна використовувати media-запити */
 @media (max-width: 768px) {
