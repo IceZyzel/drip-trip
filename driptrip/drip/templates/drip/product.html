@@ -12,7 +12,11 @@
 
         <! -- Images -->
         <div class="MainPhoto">
+<<<<<<< HEAD
+            <img src="/media/{{main_photo.photolink}}" alt="Main Image" width="500px" height="400px"/>
+=======
             <img src="/media/{{main_photo.photolink}}" alt="Main Image" width="500px" height="380px" />
+>>>>>>> cea1fab4994c39de5a93f72d671ab6a6039b8745
         </div>
         <div>
             {% for photo in product_photos %}
@@ -55,8 +59,30 @@
         </div>
 
 
-        <! -- Reviews -->
-        <div></div>
+        <div class="reviews-section">
+            <div class="reviews-container">
+                <div class="reviews-header">Reviews</div>
+                <div class="reviews-summary">
+                </div>
+                <div class="reviews-list">
+                    <!-- Review 1 -->
+                    <div class="review">
+                        <div class="review-info">
+                            <span class="review-name">Mars</span>
+                            <div class="review-rating" data-rating="5"></div>
+                        </div>
+                        <p class="review-text">This clothes is very cool :3</p>
+                    </div>
+    
+                    <!-- Review 2 -->
+                    <div class="review">
+                        <div class="review-info">
+                            <span class="review-name">Snikers</span>
+                            <div class="review-rating" data-rating="4"></div>
+                        </div>
+                        <p class="review-text">This clothes is very cool</p>
+                    </div>
+
 
     </div>
 </body>

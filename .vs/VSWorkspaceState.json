@@ -3,11 +3,9 @@
     "",
     "\\driptrip",
     "\\driptrip\\drip",
-    "\\driptrip\\driptrip",
-    "\\driptrip\\drip\\templates",
-    "\\driptrip\\drip\\templates\\drip",
+    "\\driptrip\\drip\\migrations",
     "\\driptrip\\media"
   ],
-  "SelectedNode": "\\driptrip\\drip\\templates\\drip\\home.html",
+  "SelectedNode": "\\driptrip\\drip\\forms.py",
   "PreviewInSolutionExplorer": false
 }
