@@ -1,106 +1,42 @@
 {% load static %}
 {% include "drip/header.html" %}
 
-    <main>
-        <div class="category-block">
-            <a href="/M" class="category"><div>Male</div></a>
-            <a href="/F" class="category"><div>Female</div></a>
-            <a href="/U" class="category"><div>Unisex</div></a>
-            <a href="#" class="category"><div>Other</div></a>
+<main>
+    <div class="category-block">
+        <a href="/M" class="category"><div>Male</div></a>
+        <a href="/F" class="category"><div>Female</div></a>
+        <a href="/U" class="category"><div>Unisex</div></a>
+        <a href="#" class="category"><div>Other</div></a>
+    </div>
+    <div class="main-block">
+        <div class="filter-block">
+            <form method="get" action="{% url 'home' %}">
+                {{ filter_form.as_p }}
+                <button type="submit">Apply Filters</button>
+            </form>
         </div>
-        <div class="main-block">
-            <div class="filter-block">
-                <div class="filter-category">
-                    <div class="category-title">BRAND</div>
-                    <div class="sub-category">
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Brand 1</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Brand 2</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Brand 3</div>
-                        </label>
-                    </div>
-                </div>
-                <div class="filter-category">
-                    <div class="category-title">CATEGORY</div>
-                    <div class="sub-category">
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Category 1</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Category 2</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Category 3</div>
-                        </label>
-                    </div>
-                </div>
-                <div class="filter-category">
-                    <div class="category-title">TYPE</div>
-                    <div class="sub-category">
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Type 1</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Type 2</div>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox"/>
-                            <div class="checkbox-checkmark"></div>
-                            <div class="checkbox-body">Type 3</div>
-                        </label>
-                    </div>
-                </div>
-                <div class="filter-category">
-                    <div class="category-title">PRICE</div>
-                    <div class="sub-category">
-                        <label>From: <input type="number"></label>
-                        <label>To: <input type="number"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="product-block">
-                {% for product in products %}
-                <div class="product">
-                    <a href="/product/{{product.id}}">
 
+        <div class="product-block">
+            {% for product in products %}
+                <div class="product">
+                    <a href="/product/{{ product.id }}">
                         {% for product_photo in product_list %}
-                        
-                        {% if product.id == product_photo.product_photo.product_id %}
-                        <img src="/media/{{product_photo.product_photo.photolink}}" alt="{{ product.name }}" width="200px" height="200px">
-                        {% endif %}
+                            {% if product.id == product_photo.product_photo.product_id %}
+                                <img src="/media/{{ product_photo.product_photo.photolink }}" alt="{{ product.name }}" width="200px" height="200px">
+                            {% endif %}
                         {% endfor %}
                         <h3>{{ product.name }}</h3>
                         <div class="description">
                             <p class="price">{{ product.price }} ₴</p>
-                            <!-- Добавьте остальные поля, такие как бренд и описание, из модели Product -->
+                            <!-- Add other fields, such as brand and description, from the Product model -->
                             <p class="rating">4.0<img src="{% static 'drip/img/Star.png' %}"></p>
                         </div>
                     </a>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    </main>
-    <script src="{% static 'drip/scripts/main.js' %}"></script>
+    </div>
+</main>
+<script src="{% static 'drip/scripts/main.js' %}"></script>
 </body>
 </html>

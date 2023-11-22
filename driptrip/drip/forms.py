@@ -1,8 +1,5 @@
-from dataclasses import field
-from datetime import datetime
-from multiprocessing import Value
 from django import forms
-from .models import *
+from .models import User, Product, Size, PhotoProduct , CATEGORY_CHOICES
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 
 
@@ -20,26 +17,11 @@ class LoginUserForm(forms.Form):
     username = UsernameField()
     password = forms.CharField()
 
-class CreateOrderForm(forms.ModelForm):   
-    full_name = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Full name'}))
-    adress = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Address'}))
-    phone_number = forms.CharField(max_length=12, widget=forms.TextInput(attrs={'placeholder': '0505005555'}))
-
-
-    class Meta:
-        model = Order
-        fields = ['adress', 'full_name', 'phone_number']
-        exclude = ['User', 'usercourier','date', 'status']
-        
-
-
 class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'brand', 'description', 'sex', 'category']
         exclude = ['User']
-
-    
 
 class AddNewSize(forms.ModelForm):
     class Meta:
@@ -52,6 +34,9 @@ class AddNewPhoto(forms.ModelForm):
         model = PhotoProduct
         fields = ['photolink']
         exclude = ['product']
-
-
+class ProductFilterForm(forms.Form):
+    brand = forms.CharField(required=False)
+    category = forms.MultipleChoiceField(choices=CATEGORY_CHOICES, required=False)
+    min_price = forms.FloatField(required=False)
+    max_price = forms.FloatField(required=False) 
 
