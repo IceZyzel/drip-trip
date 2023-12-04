@@ -21,6 +21,6 @@ urlpatterns = [
     path('addsize/<int:product>', views.addsize, name='addsize'),
     path('deletesize/<int:size>', views.deletesize, name='deletesize'),
     path('add_to_cart/<int:id>/<str:size_id>', views.add_to_cart, name='add_to_cart'),
-    path('remove_from_cart/<int:id>', views.remove_from_cart, name='remove_from_cart'),
+    path('remove_from_cart/<int:id>/<int:size_id>', views.remove_from_cart, name='remove_from_cart'),
     path('<str:sex_filter>/', views.home, name='home'),
 ]

@@ -2,6 +2,8 @@ from dataclasses import field
 from datetime import datetime
 from multiprocessing import Value
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 
@@ -24,13 +26,35 @@ class CreateOrderForm(forms.ModelForm):
     full_name = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Full name'}))
     adress = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder': 'Address'}))
     phone_number = forms.CharField(max_length=12, widget=forms.TextInput(attrs={'placeholder': '0505005555'}))
-
-
+    
     class Meta:
         model = Order
         fields = ['adress', 'full_name', 'phone_number']
         exclude = ['User', 'usercourier','date', 'status']
-        
+    
+    def clean_full_name(self):
+        full_name = self.cleaned_data['full_name']
+        if any(char.isdigit() for char in full_name):
+            raise ValidationError('Повне ім`я не повинно мати цифри')
+        parts = full_name.split()
+        if len(parts) != 2:
+            raise ValidationError('Введіть Імя та Прізвище через пробіл')
+        return full_name
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        if len(phone_number) != 10 or not phone_number.startswith('0') or not phone_number.isdigit():
+            raise ValidationError('Номер телефону має невірний формат')
+        return phone_number
+
+    def clean_address(self):
+        address = self.cleaned_data['address']
+
+        if len(address) < 8:
+            raise ValidationError('Адреса повинна мати не меньше, ніж 8 символів')
+        if address.isdigit():
+            raise ValidationError('Введіть справжню адресу')
+        return address
 
 
 class CreateProductForm(forms.ModelForm):

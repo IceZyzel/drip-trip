@@ -13,7 +13,7 @@
         <div class="cart-product-info">
             <a href="/product/{{product.product.id}}"><h3>{{ product.product.name }}</h3></a>
             <p class="cart-size">Size: {{product.size.size}}</p>
-            <p> <a href="/remove_from_cart/{{product.product.id}}">Delete</a></p>
+            <p><a href="/remove_from_cart/{{product.product.id}}/{{product.size.id}}">Delete</a></p>
             <div>
                 <p>{{ product.seller.username }}</p>
                 <p class="cart-price">{{ product.product.price }} ₴</p>
@@ -32,16 +32,18 @@
                 <p>Contact Information</p>
                 <label for="id_full_name">Full Name:</label>
                 {{form.full_name}}
-                <label for="id_phone_number">Phone Number:</label>
+                <br><br><label for="id_phone_number">Phone Number (+38):</label>
                 {{form.phone_number}}
             </div>
             <div>
                 <p>Delivery Address</p>
                 <label for="id_address">Address:</label>
                 {{form.adress}}
-            </div>
+            </div><br>
             <div>
-                <span>{{error}}</span>
+                {% for element in form %}
+                <span>{{ element.errors }}</span>
+                {% endfor %}
                 <input type="submit" value="Purchase" >
                 <input type="button" value="Cancel" onclick="window.location.href='/'">
             </div>

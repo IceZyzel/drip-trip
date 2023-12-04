@@ -115,16 +115,13 @@ def cart(request):
     print(cart)
     for item_id in cart:
         product_id = item_id.get('id')
-        print(item_id)
         size_id = item_id.get('size_id')
-        print(size_id)
         size = Size.objects.get(id = size_id)
         product = get_object_or_404(Product, id=product_id)
         seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
         orderproduct = OrderProduct(order_id = order_id, product_id = product_id)
-        
-       
+
         order_products.append(orderproduct)
         product_list.append({'product': product,'seller':seller, 'product_photo': product_photo ,'size':size})   
     
@@ -178,7 +175,7 @@ def add_to_cart(request, id, size_id='None' ):
             cart_ids_list.append(item['id'])
             cart_ids_list.append(item['size_id'])
         
-       # item_exist = next((item for item in request.session['cart'] if item["type"]==request.POST.get('type') and item["id"] == id), False)
+        #item_exist = next((item for item in request.session['cart'] if item["type"]==request.POST.get('type') and item["id"] == id), False)
 
         add_data = {
             'size_id':size_id,
@@ -187,21 +184,19 @@ def add_to_cart(request, id, size_id='None' ):
         print(add_data['size_id'])
 
         if (add_data['size_id'] != 'None'):
-            print(add_data)
+
             if size_id not in cart_ids_list:
-                #if size_id not in доделать (если такого размера еще нету в корзине, то можно добавить)
                 request.session['cart'].append(add_data)
                 request.session.modified = True
         
 
-        #del request.session['cart']
-        print(request.session['cart'])
+
     return redirect(request.POST.get('url_from'))
 
-def remove_from_cart(request,id):
+def remove_from_cart(request,id,size_id):
 
     for item in request.session['cart']:
-        if item['id'] == id:
+        if item['id'] == id and item['size_id'] == str(size_id):
             item.clear()
 
     while {} in request.session['cart']:
