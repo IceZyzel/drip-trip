@@ -13,7 +13,7 @@
             <div class="product-block">
                 {% for product in products %}
                 <div class="product">
-                    <img src="{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}">
+                    <img src="/media/{{ product.photoproduct_set.first.photolink }}" alt="{{ product.name }}" width="300px" height="300px">
                     <h3>{{ product.name }}</h3>
                     <div class="description">
                         <p class="price">{{ product.price }} ₴</p>

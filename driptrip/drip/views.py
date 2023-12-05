@@ -101,14 +101,13 @@ def cart(request):
         order_id = 1
     #получаем корзину
     cart = request.session.get('cart',{})  
-   
-    product_list = []
 
+    product_list = []
     order_products = []
     #текущая дата
     date = datetime.now()
     form = CreateOrderForm()
-
+    error =""
     #получаем фото товаров
     product_photos = PhotoProduct.objects.all()
     
@@ -125,26 +124,28 @@ def cart(request):
         order_products.append(orderproduct)
         product_list.append({'product': product,'seller':seller, 'product_photo': product_photo ,'size':size})   
     
-  
+
 
     if request.method == 'POST':
         if request.user.is_authenticated:
-
-            form = CreateOrderForm(request.POST)
-            form.instance.user_id = request.user.id
-            form.instance.status = 'New'
-
-            if(form.is_valid()):   
-                form.save()   
-
-                for order_product in order_products:
-                    order_product.save()
-
-                del request.session['cart'] 
-                return redirect('home')
+            if not cart:
+                error='Cart is empty'
             else:
-                print(form.errors)
-                error='Incorrect value of fields'
+                form = CreateOrderForm(request.POST)
+                form.instance.user_id = request.user.id
+                form.instance.status = 'New'
+
+                if(form.is_valid()):
+                    form.save()
+
+                    for order_product in order_products:
+                        order_product.save()
+
+                    del request.session['cart']
+                    return redirect('home')
+                else:
+                    print(form.errors)
+                    error='Incorrect value of fields'
         else:
             return redirect('Userlogin')
     
@@ -156,6 +157,7 @@ def cart(request):
         'future_order_id':order_id,
         'product_photos':product_photos,
         'form':form,
+        'error':error,
     }
     
     
@@ -228,7 +230,10 @@ def exit(request):
 
 def newproduct(request):
     if request.method == "GET":
-        return render(request, 'drip/newproduct.html')
+        if request.user.is_authenticated:
+            return render(request, 'drip/newproduct.html')
+        else:
+            return redirect('Userlogin')
     else:
         form = CreateProductForm (request.POST)
 
@@ -253,7 +258,10 @@ def all_my_products(request):
     }
 
     if request.method == "GET":
-        return render(request, 'drip/all_my_products.html', context)
+        if request.user.is_authenticated:
+            return render(request, 'drip/all_my_products.html', context)
+        else:
+            return redirect('Userlogin')
         
 def editproduct(request, product): 
     sizes_forms = []

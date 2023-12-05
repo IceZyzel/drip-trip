@@ -29,6 +29,7 @@
         <form action="{% url 'cart' %}" method="POST">
             {% csrf_token %}
             <div>
+
                 <p>Contact Information</p>
                 <label for="id_full_name">Full Name:</label>
                 {{form.full_name}}
@@ -44,6 +45,9 @@
                 {% for element in form %}
                 <span>{{ element.errors }}</span>
                 {% endfor %}
+                {% if error != "" %}
+                <span>{{ error }}</span><br><br>
+                {% endif %}
                 <input type="submit" value="Purchase" >
                 <input type="button" value="Cancel" onclick="window.location.href='/'">
             </div>
