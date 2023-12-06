@@ -1,0 +1,56 @@
+/* Стилі для форми фото */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.photo-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Стилі для заголовка */
+.photo-form h2 {
+    text-align: center;
+    color: #000;
+}
+
+/* Стилі для текстових полів та кнопок */
+.photo-form div {
+    margin-bottom: 15px;
+}
+
+.photo-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.photo-form input[type="text"],
+.photo-form input[type="file"],
+.photo-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+/* Стилі для кнопок */
+#anotherphoto,
+#submit-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#anotherphoto:hover,
+#submit-button:hover {
+    background-color: #000;
+}

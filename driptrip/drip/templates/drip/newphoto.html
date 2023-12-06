@@ -1,14 +1,17 @@
+{% load static %}
+{% include "drip/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Photo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/newphoto.css' %}">
 </head>
 <body>
     {% if flag %}
-    <form action= "{% url 'addphoto' product %}" method = "post" enctype="multipart/form-data">
+    <form action= "{% url 'addphoto' product %}" method="post" enctype="multipart/form-data" class="photo-form">
     {% else %}
-    <form action= "{% url 'newphoto' product %}" method = "post" enctype="multipart/form-data">
+    <form action= "{% url 'newphoto' product %}" method="post" enctype="multipart/form-data" class="photo-form">
     {% endif %}
     
         {% csrf_token %}

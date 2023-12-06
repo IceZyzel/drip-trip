@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="container">
-        <form action= "{% url 'editproduct' product_to_edit.pk  %}" enctype="multipart/form-data" method="post">     
-            {% csrf_token %}    
+        <form action="{% url 'editproduct' product_to_edit.pk %}" enctype="multipart/form-data" method="post" class="editproduct-form">
+            {% csrf_token %}  
             <div>
                 <label for="name">Product name</label>
                 <input type="text" id="name" name="name" value="{{ product_to_edit.name }}" required><br>
@@ -81,28 +81,35 @@
                 {% for s in sizes_forms %}
                     {% csrf_token %}
                     {{s.0.as_p}}
-
-                    <a href="{% url 'deletesize' s.1 %}"> Delete Size </a> 
-
+            
+                    <form action="{% url 'deletesize' s.1 %}" method="post" class="editproduct-form">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete Size" class="editproductdeletesize">
+                    </form>
                 {% endfor %}
-
-                <a href="{% url 'addsize' product_to_edit.pk %}"> New Size </a> 
+            
+                <a href="{% url 'addsize' product_to_edit.pk %}" class="editproductdeletesize">New Size</a> 
             </div>
-
+            
             <div>
                 {% for ph in photos_forms %}
                     {% csrf_token %}
-                    <img src="{{ ph.0.instance.photolink.url }}" alt="Photo">
-
-                    <a href="{% url 'deletephoto' ph.1 %}"> Delete Photo </a> 
-
+                    <div class="editproductphoto-container">
+                        <img src="{{ ph.0.instance.photolink.url }}" alt="Photo">
+            
+                        <form action="{% url 'deletephoto' ph.1 %}" method="post" class="editproduct-form">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete Photo" class="editproductdeletephoto">
+                        </form>
+                    </div>
                 {% endfor %}
-
-                <a href="{% url 'addphoto' product_to_edit.pk %}"> New photo </a> 
+                <a href="{% url 'addphoto' product_to_edit.pk %}" class="editproductaddphoto">New Photo</a> 
             </div>
+            
 
             <div>
-                <input type="submit" id="submit-button" name="submit-button" value="Submit">
+                <input type="submit" id="submit-button" name="submit-button" value="Submit" class="submit-button">
+
             </div>
         </form>
     </div>

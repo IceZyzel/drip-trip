@@ -1,0 +1,63 @@
+/* Стилі для контейнера */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стилі для блоку продуктів */
+.product-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Стилі для окремого продукту */
+.product {
+    max-width: 300px;
+    width: 100%;
+    margin: 20px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd; /* Додаємо рамку для зображення */
+    border-radius: 5px; /* Закруглюємо кути */
+}
+
+.product h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.description {
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #111;
+}
+
+/* Стилі для посилань Edit і Delete */
+.product a {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.product a:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,156 @@
+/* Загальні стилі */
+body {
+
+    background-color: #f2f2f2;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стилі для форми редагування продукту */
+.editproduct-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.editproduct-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.editproduct-form input[type="text"],
+.editproduct-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.editproduct-form select {
+    height: 34px;
+}
+
+/* Стилі для посилань "Delete Size" і "Delete Photo" */
+.editproduct-link {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF;
+    border: 1px solid #0056b3;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.editproduct-link:hover {
+    background-color: #0056b3;
+}
+
+/* Стилі для кнопки Submit */
+.editproduct-submit-button {
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #0056b3;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.editproduct-submit-button:hover {
+    background-color: #0056b3;
+}
+
+.editproduct-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Стилі для посилань "Delete Size" і "Delete Photo" */
+.editproduct-delete-link {
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.editproduct-delete-link:hover {
+    background-color: #000;
+    color: white;
+}
+
+/* Стиль для кнопки Submit */
+.submit-button {
+    background-color: #000F;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: 50px;
+}
+
+.submit-button:hover {
+    background-color: #000;
+}
+
+/* Стиль для кнопок "Delete Size" та "New Size" */
+.editproductdeletesize {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 0px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 100px; /* Задайте ширину кнопки за потреби */
+    height: 30px; /* Задайте висоту кнопки за потреби */
+
+}
+
+.editproductdeletesize:hover {
+    background-color: #555;
+}
+
+/* Стиль для кнопок "Delete Photo" та "New Photo" */
+.editproductdeletephoto,
+.editproductaddphoto {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 0px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 100px; /* Задайте ширину кнопки за потреби */
+    height: 30px; /* Задайте висоту кнопки за потреби */
+}
+
+
+.editproductdeletephoto:hover, .editproductaddphoto:hover {
+    background-color: #000;
+}

@@ -1,24 +1,28 @@
+{% load static %}
+{% include "drip/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'drip/css/newsize.css' %}">
 </head>
 <body>  
     <div class="container">
         {% if flag %}
-        <form action= "{% url 'addsize' product %}"  method="post">     
+        <form action="{% url 'addsize' product %}" method="post" class="newsize">     
         {% else %}
-        <form action= "{% url 'newsize' product %}"  method="post">    
+        <form action="{% url 'newsize' product %}" method="post" class="newsize">    
         {% endif %}
 
             {% csrf_token %}       
             <div>
+                <label for="size">Size:</label>
                 <input type="text" id="size" name="size" required><br>
             </div>
-
+            
             <div>
+                <label for="count">Count:</label>
                 <input type="text" id="count" name="count" required><br>
             </div>
             
