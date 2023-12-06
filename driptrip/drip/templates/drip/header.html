@@ -19,7 +19,10 @@
             </div>
             <div class="header-right">
                 <div class="search">
-                    <input type="text" placeholder="Search clothes">
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="text" name="search" placeholder="Search clothes">
+                        <button type="submit">Search</button>
+                    </form>
                 </div>
                 <a href="/all_my_products">My products</a>
                 <a href="/newproduct">
@@ -36,3 +39,5 @@
             </div>
         </div>
     </header>
+</body>
+</html>

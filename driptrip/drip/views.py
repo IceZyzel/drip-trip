@@ -11,24 +11,56 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 
 
-def home(request, sex_filter = None):
-    if(sex_filter == None):
-        products = Product.objects.all()  # Извлекаем все продукты
+def home(request, sex_filter=None):
+    if sex_filter is None:
+        products = Product.objects.all()
     else:
-        products = Product.objects.filter(sex=sex_filter)  # Извлекаем продукты по фильтру
-    
+        products = Product.objects.filter(sex=sex_filter)
+
     product_list = []
 
     for product in products:
-        product_photo = PhotoProduct.objects.filter(product_id = product.id).first()
-        product_list.append({'product_photo':product_photo})
-        
+        product_photo = PhotoProduct.objects.filter(product_id=product.id).first()
+        product_list.append({'product_photo': product_photo})
+
+    # Handle form submission
+    if request.method == 'GET':
+        form = ProductFilterForm(request.GET)
+        if form.is_valid():
+            # Filter products based on form data
+            brand = form.cleaned_data.get('brand')
+            category = form.cleaned_data.get('category')
+            min_price = form.cleaned_data.get('min_price')
+            max_price = form.cleaned_data.get('max_price')
+
+            if brand:
+                products = products.filter(brand__icontains=brand)
+
+            if category:
+                products = products.filter(category__in=category)
+
+            if min_price:
+                products = products.filter(price__gte=min_price)
+
+            if max_price:
+                products = products.filter(price__lte=max_price)
+
+            # Handle search query
+            search_query = request.GET.get('search', '')
+            if search_query:
+                products = products.filter(name__icontains=search_query)
+
+    else:
+        form = ProductFilterForm()
+
     context = {
         'sign': request.user.is_authenticated,
-        'products': products,  # Добавляем переменную products в контекст
+        'products': products,
         'product_list': product_list,
+        'filter_form': form,
     }
     return render(request, 'drip/home.html', context)
+
 
 def userlogin(request):
     if request.method == "GET":

@@ -1,6 +1,3 @@
-from dataclasses import field
-from datetime import datetime
-from multiprocessing import Value
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -63,8 +60,6 @@ class CreateProductForm(forms.ModelForm):
         fields = ['name', 'price', 'brand', 'description', 'sex', 'category']
         exclude = ['User']
 
-    
-
 class AddNewSize(forms.ModelForm):
     class Meta:
         model = Size
@@ -76,6 +71,9 @@ class AddNewPhoto(forms.ModelForm):
         model = PhotoProduct
         fields = ['photolink']
         exclude = ['product']
-
-
+class ProductFilterForm(forms.Form):
+    brand = forms.CharField(required=False)
+    category = forms.MultipleChoiceField(choices=CATEGORY_CHOICES, required=False)
+    min_price = forms.FloatField(required=False)
+    max_price = forms.FloatField(required=False) 
 
