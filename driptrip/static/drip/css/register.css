@@ -1,128 +1,75 @@
-input[type="text"] {
-    width: 30%;
+body {
+    font-family: 'Squada', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="text1"],
+input[type="text2"] {
+    width: 60%;
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
     border: 1px solid #000;
     border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 36%; 
+    display: block;
+    margin: 0 auto;
 }
 
 img {
-    width: 180px; 
-    height: 180px; 
-    display: block; 
-    margin: 100px 640px;
-}
-
-input[type="text1"] {
-    width: 30%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #000;
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50%; 
-}
-
-input[type="text2"] {
-    width: 30%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #000;
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 43%; 
-}
-
-input[type="email"] {
-    width: 30%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #000;
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 57%; 
-}
-
-input[type="password"] {
-    width: 30%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #000;
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 64%; 
-}
-
-input[type="password"][name="password2"] {
-    top: 71%; 
+    width: 180px;
+    height: 180px;
+    display: block;
+    margin: 50px auto;
 }
 
 h1.welcome-heading {
     color: #333;
     font-size: 42px;
-    position: absolute;
-    left: 50%;
-    top: 5%; 
-    transform: translateX(-50%);
-    margin: 10px 0; 
+    margin: 10px 0;
 }
 
 input[type="submit"]#register-button {
-    background-color: #000; 
-    color: #fff; 
+    background-color: #000;
+    color: #fff;
     border: none;
-    padding: 10px 160px; 
+    padding: 10px 60px;
     cursor: pointer;
-    font-family: Squada system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
-    position: absolute; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    top: 87%; 
+    display: block;
+    margin: 20px auto;
 }
 
 input[type="submit"]#register-button:hover {
-    background-color: #222; 
+    background-color: #222;
+}
+
+.login-button,
+span.already-have-account {
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
 }
 
 .login-button {
-    color: #000;
-    font-family: Squada system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    cursor: pointer;
-    margin-top: 60px; 
-    display: block; 
-    position: absolute; 
-    left: 60%; 
-    transform: translateX(-50%); 
-    top: 82%; 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 82%;
 }
 
-
-
 span.already-have-account {
-    color: #000; 
-    font-family: Squada system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
-    font-size: 16px; 
-    text-align: center;
-    cursor: pointer;
-    margin-top: 60px; 
-    display: block; 
-    position: absolute; 
-    left: 45%; 
-    transform: translateX(-50%); 
-    top: 82%; 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 88%;
 }
