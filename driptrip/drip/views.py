@@ -44,6 +44,12 @@ def home(request, sex_filter=None):
 
             if max_price:
                 products = products.filter(price__lte=max_price)
+
+            # Handle search query
+            search_query = request.GET.get('search', '')
+            if search_query:
+                products = products.filter(name__icontains=search_query)
+
     else:
         form = ProductFilterForm()
 
@@ -54,6 +60,7 @@ def home(request, sex_filter=None):
         'filter_form': form,
     }
     return render(request, 'drip/home.html', context)
+
 
 def userlogin(request):
     if request.method == "GET":
