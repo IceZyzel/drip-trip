@@ -83,17 +83,15 @@ def userlogin(request):
 
 
 def register(request):
-    if request.method == "GET":
-        return render(request, 'drip/register.html')
-    else:
+    if request.method == "POST":
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('Userlogin')
-        else:
-            print(form.errors)
-            return render(request, 'drip/register.html')
+    else:
+        form = RegisterUserForm()
 
+    return render(request, 'drip/register.html', {'form': form})
 
 def product(request, id, size_id=None ,selected_image_id = None):
 
