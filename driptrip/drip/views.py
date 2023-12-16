@@ -2,6 +2,8 @@ from asyncio.windows_events import NULL
 from datetime import datetime
 from pickle import NONE
 from types import NoneType
+
+from django.db.models import F
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -97,7 +99,7 @@ def product(request, id, size_id=None ,selected_image_id = None):
 
     product = Product.objects.get(id = id)
     product_photos = PhotoProduct.objects.filter(product_id = id)
-    sizes = Size.objects.filter(product_id = id)
+    sizes = Size.objects.filter(product_id = id, count__gt=0)
     seller = User.objects.get(id=product.user_id)
     selected_size_id = size_id
 
@@ -149,7 +151,7 @@ def cart(request):
         product = get_object_or_404(Product, id=product_id)
         seller = User.objects.get(id=product.user_id)
         product_photo = PhotoProduct.objects.filter(product_id = product_id).first()
-        orderproduct = OrderProduct(order_id = order_id, product_id = product_id)
+        orderproduct = OrderProduct(order_id = order_id, product_id = product_id, size_name = size.size)
 
         order_products.append(orderproduct)
         product_list.append({'product': product,'seller':seller, 'product_photo': product_photo ,'size':size})   
@@ -170,6 +172,12 @@ def cart(request):
 
                     for order_product in order_products:
                         order_product.save()
+
+                    for element in product_list:
+                        size_to_delete = element.get('size')
+                        size_to_delete.count = F('count') - 1
+                        size_to_delete.save()
+                        print(size_to_delete)
 
                     del request.session['cart']
                     return redirect('home')
