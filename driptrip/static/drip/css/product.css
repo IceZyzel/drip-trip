@@ -14,56 +14,57 @@
     margin-right: 100px;
 }
 
-.ProductPhoto:not(:last-child) {
-    margin-right: -305px;
-}
+    .ProductPhoto:not(:last-child) {
+        margin-right: -305px;
+    }
 
 .descriptionContainer {
     margin-top: 100px;
     margin-left: 400px;
-    width: 24%;
+    width: 31%;
     height: 300px;
     font-size: 16px;
     line-height: 1.5;
     text-align: justify;
     border: 1px solid black;
     padding: 15px;
+
 }
 
 .productName {
     margin-top: -950px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-size: 24px;
 }
 
 .productBrand {
     margin-top: -20px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-size: 24px;
 }
 
 .productSex {
     margin-top: -20px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-size: 24px;
 }
 
 .productPrice {
     margin-top: -10px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-size: 24px;
 }
 
 .Size {
     margin-top: 0px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-size: 24px;
 }
 
 .size-container {
     display: flex;
     margin-top: 10px;
-    margin-left: 1200px;
+    margin-left: 1000px;
 }
 
 .size-item {
@@ -77,9 +78,9 @@
     margin-top: 5px;
 }
 
-.size-item:hover {
-    background-color: #eee;
-}
+    .size-item:hover {
+        background-color: #eee;
+    }
 
 /* Стиль для кнопки "Add to Cart" */
 .AddToCartButton {
@@ -88,50 +89,33 @@
     border: none;
     padding: 20px 80px;
     margin-top: 30px;
-    margin-left: 1200px;
+    margin-left: 1000px;
     font-family: SquadaOne;
 }
 
-.WriteReviewButton {
-    color: white;
-    background-color: grey;
-    border: none;
-    padding: 15px 55px;
-    margin-top: 45px;
-    margin-left: 1215px;
-    font-family: SquadaOne;
-}
 
 .SellerBlock {
     font-size: 32px;
     position: relative;
-    top: 150px;
-    left: 1200px;
+    top: 75px;
+    left: 1000px;
     border: 2px solid black;
     padding: 10px;
-    width: 300px;
-    height: 120px;
+    width: 190px;
+    height: 100px;
     text-align: center;
 }
 
-.ShowContactButton {
-    position: absolute;
-    top: 80px;
-    right: 80px;
-    color: white;
-    background-color: grey;
-    width: 150px;
-    height: 35px;
-    font-family: SquadaOne;
-}
+/* Убраны стили для кнопки Show Contact */
 
 .reviews-container {
     border: 2px solid black;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 450px;
-    margin-left: 5px;
-    
+    margin-top: 550px;
+    margin-left: 300px;
+    width: 900px;
+
 }
 
 .reviews-header {
@@ -143,6 +127,7 @@
     color: white;
     box-sizing: border-box;
     text-align: center;
+
 }
 
 .reviews-summary {
@@ -176,33 +161,38 @@
     color: gold;
 }
 
-.review-rating::before {
-    content: '★★★★★';
-    letter-spacing: 3px;
-}
+    .review-rating::before {
+        content: '★★★★★';
+        letter-spacing: 3px;
+    }
 
-.review-rating[data-rating="1"]::before {
-    content: '★☆☆☆☆';
-}
+    .review-rating[data-rating="1"]::before {
+        content: '★☆☆☆☆';
+    }
 
-.review-rating[data-rating="2"]::before {
-    content: '★★☆☆☆';
-}
+    .review-rating[data-rating="2"]::before {
+        content: '★★☆☆☆';
+    }
 
-.review-rating[data-rating="3"]::before {
-    content: '★★★☆☆';
-}
+    .review-rating[data-rating="3"]::before {
+        content: '★★★☆☆';
+    }
 
-.review-rating[data-rating="4"]::before {
-    content: '★★★★☆';
-}
+    .review-rating[data-rating="4"]::before {
+        content: '★★★★☆';
+    }
 
-.review-rating[data-rating="5"]::before {
-    content: '★★★★★';
-}
+    .review-rating[data-rating="5"]::before {
+        content: '★★★★★';
+    }
 
 .review-text {
     margin: 0;
+
+}
+
+.write-review-section h2 {
+    margin-left: 300px; /* Измените значение по вашему усмотрению */
 }
 
 /* Стиль для кнопки "Submit Review" */
@@ -214,45 +204,48 @@
     margin-top: 20px;
     font-family: SquadaOne;
     font-size: 20px;
+    margin-left: 300px;
+    margin-bottom: 20px;
 }
 
+/* Обновленные стили для поля ввода рейтинга */
 .RatingInput {
     width: 15%;
     padding: 10px;
     box-sizing: border-box;
     margin-bottom: 15px;
-    margin-left: 5px;
+    margin-left: 300px;
     border: 2px solid black;
     border-radius: 5px;
     font-size: 16px;
 }
 
-/* Стиль для метки рейтинга */
 .RatingLabel {
     display: block;
     margin-top: 15px;
     margin-bottom: 5px;
     font-size: 24px;
-    margin-left: 5px;
+    margin-left: 300px;
 }
-/* Стиль для поля ввода текста описания */
+
 .DescriptionInput {
-    width: calc(100% - 10px); /* Учитываем margin-left и margin-right */
+    width: calc(950px);
     padding: 10px;
     box-sizing: border-box;
     margin-bottom: 15px;
-    border: 2px solid black; /* Черная рамка */
+    border: 2px solid black;
     border-radius: 5px;
     font-size: 16px;
-    margin-left: 5px; /* Добавленный margin-left */
-    resize: none; /* Запрет на растягивание поля */
+    margin-left: 300px;
+    resize: none;
 }
 
-/* Стиль для метки текста описания */
 .DescriptionLabel {
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
+    margin-left: 300px;
+
 }
 
 /* Якщо потрібно змінювати розміри та розташування при різних розмірах екрану, можна використовувати media-запити */

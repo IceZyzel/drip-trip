@@ -6,17 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'drip/css/product.css' %}">
+    <!-- Ссылки на библиотеку RateYo для звездного рейтинга -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 </head>
 <body>
     <div class="container">
 
         <!-- Images -->
         <div class="MainPhoto">
-            <img src="/media/{{ main_photo.photolink }}" alt="Main Image" width="500px" height="400px"/>
+            <img src="/media/{{ main_photo.photolink }}" alt="Main Image" width="500px" height="400px" />
         </div>
         <div>
             {% for photo in product_photos %}
-                <img class="ProductPhoto" src="/media/{{ photo.photolink }}" alt="All Images" width="100px" height="100px" />
+            <img class="ProductPhoto" src="/media/{{ photo.photolink }}" alt="All Images" width="100px" height="100px" />
             {% endfor %}
         </div>
 
@@ -33,7 +37,7 @@
 
             <div class="size-container">
                 {% for size in sizes %}
-                    <a class="size-item" href="{% url 'product' product.id size.id %}">{{ size.size }}</a>
+                <a class="size-item" href="{% url 'product' product.id size.id %}">{{ size.size }}</a>
                 {% endfor %}
             </div>
 
@@ -43,29 +47,27 @@
                 <input type="submit" name="add_to_cart" value="Add to Cart" class="AddToCartButton" />
             </form>
 
-            <input type="button" name="write_review" value="Write a review" class="WriteReviewButton" />
+           
 
         </div>
 
         <!-- Seller Block -->
         <div class="SellerBlock">
             <p class="SellerText">Seller: {{ seller.username }}</p>
-            <input type="button" name="show_contact" value="Show Contact" class="ShowContactButton" />
+            <!-- Убрана кнопка Show Contact -->
         </div>
 
         <!-- Reviews Section -->
         <div class="reviews-section">
             <div class="reviews-container">
                 <div class="reviews-header">Reviews</div>
-                <div class="reviews-summary">
-                    <!-- Display average rating or any summary you want -->
-                    Average Rating: <!-- Add average rating here -->
-                </div>
+                <!-- Убран блок с Average Rating -->
                 <div class="reviews-list">
                     {% for review in reviews %}
                     <div class="review">
                         <div class="review-info">
                             <span class="review-name">{{ review.user.username }}</span>
+                            <!-- Используется RateYo для отображения рейтинга -->
                             <div class="review-rating" data-rating="{{ review.rate }}"></div>
                         </div>
                         <p class="review-text">{{ review.description }}</p>
@@ -74,16 +76,31 @@
                 </div>
             </div>
 
-            <!-- Form for Writing a Review -->
+
             <div class="write-review-section">
                 <h2>Write a Review</h2>
                 <form action="{% url 'write_review' product.id %}" method="post">
                     {% csrf_token %}
                     <textarea name="description" rows="4" cols="50" placeholder="Write your review here" class="DescriptionInput" required></textarea>
-                    <label for="rating" class="RatingLabel">Rating:</label>
-                    <input type="number" name="rating" min="1" max="5" class="RatingInput" required>
+                    <!-- Используется RateYo для ввода рейтинга в виде звезд -->
+                    <div class="rating-container">
+                        <label for="rating" class="RatingLabel">Rating:</label>
+                        <div id="rating" class="RatingInput"></div>
+                        <input type="hidden" name="rating" id="rating-value" required>
+                    </div>
                     <input type="submit" class="SubmitReviewButton" value="Submit Review">
                 </form>
+                <script>
+                    $(function () {
+                        $("#rating").rateYo({
+                            rating: 0,
+                            fullStar: true,
+                            onChange: function (rating, rateYoInstance) {
+                                $("#rating-value").val(rating);
+                            }
+                        });
+                    });
+                </script>
             </div>
         </div>
 
