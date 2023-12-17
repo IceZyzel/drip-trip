@@ -3,7 +3,7 @@ from django.db import models
 from django import forms
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 GENDER_CHOICES = (
     ('M', 'Male'),
     ('F', 'Female'),
@@ -59,7 +59,7 @@ class Review (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     description = models.TextField(max_length=250)
     rate = models.IntegerField(validators=[MaxValueValidator(5)])
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
 
 class Order (models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

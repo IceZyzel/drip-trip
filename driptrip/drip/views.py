@@ -95,32 +95,50 @@ def register(request):
 
     return render(request, 'drip/register.html', {'form': form})
 
-def product(request, id, size_id=None ,selected_image_id = None):
-
-    product = Product.objects.get(id = id)
-    product_photos = PhotoProduct.objects.filter(product_id = id)
-    sizes = Size.objects.filter(product_id = id, count__gt=0)
+def product(request, id, size_id=None, selected_image_id=None):
+    product = get_object_or_404(Product, id=id)
+    product_photos = PhotoProduct.objects.filter(product_id=id)
+    sizes = Size.objects.filter(product_id=id, count__gt=0)
     seller = User.objects.get(id=product.user_id)
     selected_size_id = size_id
 
-
-    if (selected_image_id==None):
+    if selected_image_id is None:
         main_photo = product_photos.first()
     else:
-        main_photo = product_photos.get(id = selected_image_id)
+        main_photo = product_photos.get(id=selected_image_id)
 
-    
+    # Fetch reviews for the product
+    reviews = Review.objects.filter(product=product)
+
     context = {
         'product': product,
         'product_photos': product_photos,
         'main_photo': main_photo,
         'sizes': sizes,
-        'seller':seller,
-        'selected_size_id':selected_size_id,
+        'seller': seller,
+        'selected_size_id': selected_size_id,
+        'reviews': reviews,  # Add reviews to the context
     }
 
+    return render(request, 'drip/product.html', context)
 
-    return render(request,'drip/product.html', context)
+def write_review(request, product_id):
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        rating = request.POST.get('rating')
+
+        # Check if the user is authenticated before allowing them to leave a review
+        if request.user.is_authenticated:
+            Review.objects.create(
+                product_id=product_id,
+                user=request.user,
+                description=description,
+                rate=rating,
+                date=timezone.now()  # Set the date explicitly
+            )
+
+    return redirect('product', id=product_id)
+
 
 
 def cart(request):
