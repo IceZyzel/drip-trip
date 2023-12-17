@@ -89,6 +89,7 @@
     padding: 20px 80px;
     margin-top: 30px;
     margin-left: 1200px;
+    font-family: SquadaOne;
 }
 
 .WriteReviewButton {
@@ -98,6 +99,7 @@
     padding: 15px 55px;
     margin-top: 45px;
     margin-left: 1215px;
+    font-family: SquadaOne;
 }
 
 .SellerBlock {
@@ -120,13 +122,16 @@
     background-color: grey;
     width: 150px;
     height: 35px;
+    font-family: SquadaOne;
 }
 
 .reviews-container {
     border: 2px solid black;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 550px;
+    margin-top: 450px;
+    margin-left: 5px;
+    
 }
 
 .reviews-header {
@@ -198,6 +203,56 @@
 
 .review-text {
     margin: 0;
+}
+
+/* Стиль для кнопки "Submit Review" */
+.SubmitReviewButton {
+    color: white;
+    background-color: black;
+    border: none;
+    padding: 15px 30px;
+    margin-top: 20px;
+    font-family: SquadaOne;
+    font-size: 20px;
+}
+
+.RatingInput {
+    width: 15%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Стиль для метки рейтинга */
+.RatingLabel {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 24px;
+    margin-left: 5px;
+}
+/* Стиль для поля ввода текста описания */
+.DescriptionInput {
+    width: calc(100% - 10px); /* Учитываем margin-left и margin-right */
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border: 2px solid black; /* Черная рамка */
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 5px; /* Добавленный margin-left */
+    resize: none; /* Запрет на растягивание поля */
+}
+
+/* Стиль для метки текста описания */
+.DescriptionLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
 /* Якщо потрібно змінювати розміри та розташування при різних розмірах екрану, можна використовувати media-запити */

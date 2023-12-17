@@ -63,13 +63,13 @@
                 </div>
                 <div class="reviews-list">
                     {% for review in reviews %}
-                        <div class="review">
-                            <div class="review-info">
-                                <span class="review-name">{{ review.user.username }}</span>
-                                <div class="review-rating" data-rating="{{ review.rate }}"></div>
-                            </div>
-                            <p class="review-text">{{ review.description }}</p>
+                    <div class="review">
+                        <div class="review-info">
+                            <span class="review-name">{{ review.user.username }}</span>
+                            <div class="review-rating" data-rating="{{ review.rate }}"></div>
                         </div>
+                        <p class="review-text">{{ review.description }}</p>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
@@ -79,10 +79,10 @@
                 <h2>Write a Review</h2>
                 <form action="{% url 'write_review' product.id %}" method="post">
                     {% csrf_token %}
-                    <textarea name="description" rows="4" cols="50" placeholder="Write your review here" required></textarea>
-                    <label for="rating">Rating:</label>
-                    <input type="number" name="rating" min="1" max="5" required>
-                    <input type="submit" value="Submit Review">
+                    <textarea name="description" rows="4" cols="50" placeholder="Write your review here" class="DescriptionInput" required></textarea>
+                    <label for="rating" class="RatingLabel">Rating:</label>
+                    <input type="number" name="rating" min="1" max="5" class="RatingInput" required>
+                    <input type="submit" class="SubmitReviewButton" value="Submit Review">
                 </form>
             </div>
         </div>
