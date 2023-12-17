@@ -14,6 +14,7 @@ body {
   padding-right: 80px;
 }
 
+
 body {
   margin: 0;
 }
@@ -62,6 +63,7 @@ body {
   font-size: 20px;
 }
 
+
 .header-right a{
   font-size: 32px;
   font-weight: 400;
@@ -75,6 +77,21 @@ body {
   margin-left: 20px;
   cursor: pointer;
 }
+
+.header-right button {
+  background-color: #000000; /* Чорний колір фону кнопки */
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.header-right button:hover {
+  background-color: #545454; /* Колір фону кнопки при наведенні */
+}
+
 
 
 .category-block {
@@ -123,6 +140,46 @@ border: 1px solid #ccc;
 background-color: #FFFFFF;
 margin-bottom: 5px;
 }
+
+button {
+  background-color: #000000; /* Чорний колір фону кнопки */
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 10px; /* Відступ зверху */
+}
+
+button:hover {
+  background-color: #333333; /* Колір фону кнопки при наведенні */
+}
+
+.filter-block form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px; /* Додайте відстань знизу форми */
+}
+
+.filter-block label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.filter-block input[type="text"],
+.filter-block select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px; /* Зменште відстань між полями тут */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
 
 .category-title {
 cursor: pointer;
