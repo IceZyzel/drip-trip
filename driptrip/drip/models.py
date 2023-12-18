@@ -24,9 +24,7 @@ CATEGORY_CHOICES = (
     ('Sportswear', 'Sportswear'),
     ('Sleepwear', 'Sleepwear'),
     ('Workwear', 'Workwear'),
-    ('Ethical and Sustainable Fashion', 'Ethical and Sustainable Fashion'),
-    ('Costumes and Cosplay', 'Costumes and Cosplay'),
-    ('Designer Clothing', 'Designer Clothing'),
+
     )
 
 class User (User):
